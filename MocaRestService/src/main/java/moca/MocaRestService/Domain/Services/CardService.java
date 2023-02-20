@@ -1,7 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
 import lombok.AllArgsConstructor;
-import moca.MocaRestService.Data.Entities.Cartao;
 import moca.MocaRestService.Data.Repositories.ICardRepository;
 
 @AllArgsConstructor
