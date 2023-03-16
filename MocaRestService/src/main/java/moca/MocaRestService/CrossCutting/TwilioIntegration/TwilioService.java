@@ -4,12 +4,13 @@ import com.twilio.Twilio;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TwilioService  implements ITwilioService{
-    private final String ACCOUNT_SID = "ACfc50e4937c46f8778c82cd04dbc613f2";
-    private final String AUTH_TOKEN = "b11e61ddf7a9283a1df7d15108af9b80";
+    @Value("${twilio.account.sid}") private String ACCOUNT_SID;
+    @Value("${twilio.auth.token}") private String AUTH_TOKEN;
 
     @Override
     public String SendSms(SmsSenderRequest request) {
