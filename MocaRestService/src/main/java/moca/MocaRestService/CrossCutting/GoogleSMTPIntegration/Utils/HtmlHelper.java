@@ -1,4 +1,4 @@
-package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration;
+package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Utils;
 
 public class HtmlHelper {
 

@@ -1,4 +1,4 @@
-package moca.MocaRestService.Domain.Helper.Util;
+package moca.MocaRestService.Domain.Helper;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,6 +1,8 @@
-package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration;
+package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Services;
 
-import org.springframework.core.io.ResourceLoader;
+import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Interfaces.IEmailSenderService;
+import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetails;
+import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Utils.HtmlHelper;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
@@ -14,8 +16,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 @Service
 public class EmailSenderService implements IEmailSenderService {
-    @Autowired private JavaMailSender javaMailSender;
-    @Autowired private ResourceLoader resourceLoader;
+    @Autowired
+    private JavaMailSender javaMailSender;
     @Value("${spring.mail.username}") private String username;
     @Value("${spring.mail.host}") private String host;
     @Value("${spring.mail.password}") private String password;
@@ -39,9 +41,6 @@ public class EmailSenderService implements IEmailSenderService {
             return "Error while Sending Mail";
         }
     }
-
-
-
 
     public String sendMail(EmailDetails details) throws Exception {
 

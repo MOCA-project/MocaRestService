@@ -1,4 +1,4 @@
-package moca.MocaRestService.CrossCutting.TwilioIntegration;
+package moca.MocaRestService.CrossCutting.TwilioIntegration.Models;
 
 public class SmsSenderRequest {
     public String to;

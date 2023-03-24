@@ -1,4 +1,4 @@
-package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration;
+package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models;
 
 public class EmailDetails {
     public String subject;

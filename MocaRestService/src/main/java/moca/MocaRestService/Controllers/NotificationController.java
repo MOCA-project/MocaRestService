@@ -1,9 +1,9 @@
 package moca.MocaRestService.Controllers;
 
-import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.EmailDetails;
-import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.IEmailSenderService;
-import moca.MocaRestService.CrossCutting.TwilioIntegration.ITwilioService;
-import moca.MocaRestService.CrossCutting.TwilioIntegration.SmsSenderRequest;
+import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Interfaces.IEmailSenderService;
+import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetails;
+import moca.MocaRestService.CrossCutting.TwilioIntegration.Interfaces.ITwilioService;
+import moca.MocaRestService.CrossCutting.TwilioIntegration.Models.SmsSenderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,6 @@ public class NotificationController {
 
     @Autowired
     private ITwilioService twilioService;
-
     @Autowired
     private IEmailSenderService emailService;
 

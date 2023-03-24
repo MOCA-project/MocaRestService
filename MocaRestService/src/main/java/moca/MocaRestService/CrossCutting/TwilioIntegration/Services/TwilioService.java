@@ -1,14 +1,14 @@
-package moca.MocaRestService.CrossCutting.TwilioIntegration;
+package moca.MocaRestService.CrossCutting.TwilioIntegration.Services;
 
 import com.twilio.Twilio;
-import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+import moca.MocaRestService.CrossCutting.TwilioIntegration.Interfaces.ITwilioService;
+import moca.MocaRestService.CrossCutting.TwilioIntegration.Models.SmsSenderRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TwilioService  implements ITwilioService{
+public class TwilioService  implements ITwilioService {
     @Value("${twilio.account.sid}") private String ACCOUNT_SID;
     @Value("${twilio.auth.token}") private String AUTH_TOKEN;
 
