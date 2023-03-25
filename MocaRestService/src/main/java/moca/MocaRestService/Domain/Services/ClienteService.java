@@ -15,7 +15,6 @@ public class ClienteService {
     @Autowired
     private IClienteRepository clienteRepository;
 
-
     public ClienteResponse addClient(ClienteRequest request){
         //cliente = classe do banco (entidade)
         Cliente newCliente = new Cliente();
@@ -28,18 +27,14 @@ public class ClienteService {
 
         Cliente cliente =  clienteRepository.save(newCliente);
 
-        //
-
         return new ClienteResponse(
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getEmail(),
                 cliente.getIdPerfil());
-
     }
 
     public List<Cliente> getAll(){
-
         return clienteRepository.findAll();
     }
 
