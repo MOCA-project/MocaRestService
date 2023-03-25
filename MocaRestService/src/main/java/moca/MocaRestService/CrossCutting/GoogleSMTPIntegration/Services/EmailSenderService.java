@@ -7,7 +7,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Properties;
-import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -44,7 +43,7 @@ public class EmailSenderService implements IEmailSenderService {
 
     public String sendMail(EmailDetails details) throws Exception {
 
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
