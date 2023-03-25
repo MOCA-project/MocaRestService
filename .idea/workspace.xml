@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9b174329-e52d-4c85-add2-d5e21dfc5cc8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/EmailDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/Models/EmailDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/EmailSenderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/Services/EmailSenderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/HtmlHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/Utils/HtmlHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/IEmailSenderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/GoogleSMTPIntegration/Interfaces/IEmailSenderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/TwilioIntegration/ITwilioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/TwilioIntegration/Interfaces/ITwilioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/TwilioIntegration/SmsSenderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/TwilioIntegration/Models/SmsSenderRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/TwilioIntegration/TwilioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/CrossCutting/TwilioIntegration/Services/TwilioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Controllers/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Domain/Services/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Domain/Services/ClienteService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +30,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/MocaRestService",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -56,6 +56,7 @@
       <updated>1676928243917</updated>
       <workItem from="1676928246319" duration="7000" />
       <workItem from="1679669156639" duration="400000" />
+      <workItem from="1679697249585" duration="599000" />
     </task>
     <servers />
   </component>
