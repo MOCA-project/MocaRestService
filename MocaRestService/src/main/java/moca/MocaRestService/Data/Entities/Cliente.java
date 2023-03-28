@@ -30,6 +30,9 @@ public class Cliente {
     @Basic
     @Column(name = "id_perfil")
     private Long idPerfil;
+    @Basic
+    @Column(name = "saldo")
+    private double saldo;
 
     public long getId() {
         return id;
@@ -69,6 +72,14 @@ public class Cliente {
 
     public void setIdPerfil(Long idPerfil) {
         this.idPerfil = idPerfil;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
     @Override

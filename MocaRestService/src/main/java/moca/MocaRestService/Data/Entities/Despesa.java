@@ -2,7 +2,6 @@ package moca.MocaRestService.Data.Entities;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +39,9 @@ public class Despesa {
     @Basic
     @Column(name = "id_tipo_despesa")
     private Long idTipoDespesa;
+    @Basic
+    @Column(name = "is_cartao")
+    private boolean isCartao;
 
     public long getIdDespesa() {
         return idDespesa;
@@ -103,6 +105,14 @@ public class Despesa {
 
     public void setIdTipoDespesa(Long idTipoDespesa) {
         this.idTipoDespesa = idTipoDespesa;
+    }
+
+    public boolean isCartao() {
+        return isCartao;
+    }
+
+    public void setCartao(boolean cartao) {
+        isCartao = cartao;
     }
 
     @Override

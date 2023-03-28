@@ -2,14 +2,13 @@ package moca.MocaRestService.Domain.Models.Requests;
 
 import java.util.Date;
 
-public class ExpenseRequest {
+public class DespesaParceladaRequest {
     private String descricao;
     private double valor;
     private Date data;
-    private boolean isPaid;
-    private boolean isParcela;
     private Long idCliente;
     private Long idTipoDespesa;
+    private int parcelas;
 
     public String getDescricao() {
         return descricao;
@@ -35,22 +34,6 @@ public class ExpenseRequest {
         this.data = data;
     }
 
-    public boolean isPaid() {
-        return isPaid;
-    }
-
-    public void setPaid(boolean paid) {
-        isPaid = paid;
-    }
-
-    public boolean isParcela() {
-        return isParcela;
-    }
-
-    public void setParcela(boolean parcela) {
-        isParcela = parcela;
-    }
-
     public Long getIdCliente() {
         return idCliente;
     }
@@ -65,5 +48,13 @@ public class ExpenseRequest {
 
     public void setIdTipoDespesa(Long idTipoDespesa) {
         this.idTipoDespesa = idTipoDespesa;
+    }
+
+    public int getParcelas() {
+        return parcelas;
+    }
+
+    public void setParcelas(int parcelas) {
+        this.parcelas = parcelas;
     }
 }

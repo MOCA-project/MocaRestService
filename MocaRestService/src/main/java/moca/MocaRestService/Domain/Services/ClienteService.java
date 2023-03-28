@@ -1,6 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Data.Entities.Cliente;
+import moca.MocaRestService.Data.Entities.Despesa;
 import moca.MocaRestService.Data.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Models.Requests.ClienteRequest;
 import moca.MocaRestService.Domain.Models.Responses.ClienteResponse;

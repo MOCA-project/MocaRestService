@@ -1,21 +1,29 @@
 package moca.MocaRestService.Data.Entities;
 
-import jakarta.persistence.*;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Date;
+import java.util.Objects;
 import java.util.Objects;
 
 @Entity
 public class Cartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @jakarta.persistence.Id
     @Column(name = "id_cartao")
     private long idCartao;
     @Basic
     @Column(name = "saldo")
-    private Integer saldo;
+    private double saldo;
     @Basic
     @Column(name = "limite")
-    private Integer limite;
+    private double limite;
     @Basic
     @Column(name = "id_cliente")
     private Long idCliente;
@@ -31,19 +39,19 @@ public class Cartao {
         this.idCartao = idCartao;
     }
 
-    public Integer getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Integer saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
-    public Integer getLimite() {
+    public double getLimite() {
         return limite;
     }
 
-    public void setLimite(Integer limite) {
+    public void setLimite(double limite) {
         this.limite = limite;
     }
 
