@@ -3,17 +3,12 @@ package moca.MocaRestService.Data.Entities;
 
 import java.util.Objects;
 import java.util.Date;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 public class Receita {
-    @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @jakarta.persistence.Id
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_receita")

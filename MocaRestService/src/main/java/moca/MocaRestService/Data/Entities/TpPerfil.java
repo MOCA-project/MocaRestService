@@ -1,7 +1,6 @@
 package moca.MocaRestService.Data.Entities;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity

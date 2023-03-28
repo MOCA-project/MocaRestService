@@ -1,12 +1,6 @@
 package moca.MocaRestService.Data.Entities;
 
-
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Objects;
@@ -15,7 +9,6 @@ import java.util.Objects;
 public class Cartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @jakarta.persistence.Id
     @Column(name = "id_cartao")
     private long idCartao;
     @Basic
