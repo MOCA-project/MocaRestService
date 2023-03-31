@@ -65,7 +65,7 @@ public class DespesasService {
         List<ExpenseResponse> result = new ArrayList<>();
         for (int i = 0; i < request.getParcelas(); i++) {
             Despesa despesa = new Despesa();
-            despesa.setData(request.getData());
+            despesa.setData(request.getData()); // Incrementar mes
             despesa.setDescricao(request.getDescricao());
             despesa.setIdTipoDespesa(request.getIdTipoDespesa());
             despesa.setPaid(false);

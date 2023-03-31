@@ -14,19 +14,19 @@ public class Porquinho {
     private String nome;
     @Basic
     @Column(name = "valor_final")
-    private Integer valorFinal;
+    private double valorFinal;
     @Basic
     @Column(name = "valor_atual")
-    private Integer valorAtual;
+    private double valorAtual;
     @Basic
     @Column(name = "is_concluido")
     private Boolean isConcluido;
     @Basic
     @Column(name = "id_cliente")
     private Long idCliente;
-    @Basic
-    @Column(name = "id_obj")
-    private Long idObj;
+//    @Basic
+//    @Column(name = "id_obj")
+//    private Long idObj;
 
     public long getIdPorquinho() {
         return idPorquinho;
@@ -44,19 +44,19 @@ public class Porquinho {
         this.nome = nome;
     }
 
-    public Integer getValorFinal() {
+    public double getValorFinal() {
         return valorFinal;
     }
 
-    public void setValorFinal(Integer valorFinal) {
+    public void setValorFinal(double valorFinal) {
         this.valorFinal = valorFinal;
     }
 
-    public Integer getValorAtual() {
+    public double getValorAtual() {
         return valorAtual;
     }
 
-    public void setValorAtual(Integer valorAtual) {
+    public void setValorAtual(double valorAtual) {
         this.valorAtual = valorAtual;
     }
 
@@ -76,24 +76,24 @@ public class Porquinho {
         this.idCliente = idCliente;
     }
 
-    public Long getIdObj() {
-        return idObj;
-    }
-
-    public void setIdObj(Long idObj) {
-        this.idObj = idObj;
-    }
+//    public Long getIdObj() {
+//        return idObj;
+//    }
+//
+//    public void setIdObj(Long idObj) {
+//        this.idObj = idObj;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Porquinho porquinho = (Porquinho) o;
-        return idPorquinho == porquinho.idPorquinho && Objects.equals(nome, porquinho.nome) && Objects.equals(valorFinal, porquinho.valorFinal) && Objects.equals(valorAtual, porquinho.valorAtual) && Objects.equals(isConcluido, porquinho.isConcluido) && Objects.equals(idCliente, porquinho.idCliente) && Objects.equals(idObj, porquinho.idObj);
+        return idPorquinho == porquinho.idPorquinho && Objects.equals(nome, porquinho.nome) && Objects.equals(valorFinal, porquinho.valorFinal) && Objects.equals(valorAtual, porquinho.valorAtual) && Objects.equals(isConcluido, porquinho.isConcluido) && Objects.equals(idCliente, porquinho.idCliente);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPorquinho, nome, valorFinal, valorAtual, isConcluido, idCliente, idObj);
+        return Objects.hash(idPorquinho, nome, valorFinal, valorAtual, isConcluido, idCliente);
     }
 }
