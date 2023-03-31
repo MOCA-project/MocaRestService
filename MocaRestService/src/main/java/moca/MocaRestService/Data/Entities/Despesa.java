@@ -1,7 +1,7 @@
 package moca.MocaRestService.Data.Entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +19,7 @@ public class Despesa {
     private double valor;
     @Basic
     @Column(name = "data")
-    private Date data;
+    private LocalDate data;
     @Basic
     @Column(name = "is_paid")
     private Boolean isPaid;
@@ -60,11 +60,11 @@ public class Despesa {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

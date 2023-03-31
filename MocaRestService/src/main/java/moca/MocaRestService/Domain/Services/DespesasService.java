@@ -5,6 +5,7 @@ import moca.MocaRestService.Data.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
+import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,14 +65,16 @@ public class DespesasService {
     public List<ExpenseResponse> installmentExpense(DespesaParceladaRequest request){
         List<ExpenseResponse> result = new ArrayList<>();
         for (int i = 0; i < request.getParcelas(); i++) {
+            var dataFutura = request.getData().plusMonths(i);
             Despesa despesa = new Despesa();
-            despesa.setData(request.getData()); // Incrementar mes
+            despesa.setData(dataFutura); // Incrementar mes
             despesa.setDescricao(request.getDescricao());
             despesa.setIdTipoDespesa(request.getIdTipoDespesa());
             despesa.setPaid(false);
             despesa.setParcela(true);
             despesa.setIdCliente(request.getIdCliente());
             despesa.setValor(request.getValor() / request.getParcelas());
+            despesa.setCartao(true);
             var response = expenseRepository.save(despesa);
             result.add(new ExpenseResponse(
                     response.getIdDespesa(),

@@ -7,17 +7,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IDespesasRepository extends JpaRepository<Despesa, Long> {
-    @Query(value = "select  sum(valor) from despesa d where d.id_cliente  = ?1 " +
-            "and d.is_paid = 0 " +
+    @Query(value = "select coalesce( sum(d.valor), 0) from Despesa d where d.idCliente  = ?1 " +
+            "and d.isPaid = true " +
             "and MONTH(d.data) = ?2 " +
-            "and YEAR(d.data) = ?3 ",
-            nativeQuery = true)
-     double getDespesasHome(long idCliente, int mes, int ano);
+            "and YEAR(d.data) = ?3 ")
+     double getDespesasPagas(long idCliente, int mes, int ano);
+    @Query(value = "select coalesce( sum(d.valor), 0) from Despesa d where d.idCliente  = ?1 " +
+            "and MONTH(d.data) = ?2 " +
+            "and YEAR(d.data) = ?3 ")
+    double getDespesas(long idCliente, int mes, int ano);
 
-    @Query(value = "select  sum(valor) from despesa d where d.id_cliente  = ?1 " +
+    @Query(value = "select coalesce( sum(d.valor), 0) from Despesa d where d.idCliente  = ?1 " +
             "and MONTH(d.data) = ?2 " +
             "and YEAR(d.data) = ?3 " +
-            "and d.is_cartao = 1 ",
-            nativeQuery = true)
-    double getDespesasCartaoHome(long idCliente, int mes, int ano);
+            "and d.isCartao = true ")
+    double getDespesasCartao(long idCliente, int mes, int ano);
 }

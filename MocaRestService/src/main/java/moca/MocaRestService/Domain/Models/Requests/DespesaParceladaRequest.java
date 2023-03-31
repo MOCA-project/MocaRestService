@@ -1,11 +1,11 @@
 package moca.MocaRestService.Domain.Models.Requests;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DespesaParceladaRequest {
     private String descricao;
     private double valor;
-    private Date data;
+    private LocalDate data;
     private Long idCliente;
     private Long idTipoDespesa;
     private int parcelas;
@@ -26,11 +26,11 @@ public class DespesaParceladaRequest {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

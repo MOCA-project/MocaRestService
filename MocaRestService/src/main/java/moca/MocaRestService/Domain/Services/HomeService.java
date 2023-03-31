@@ -24,9 +24,12 @@ public class HomeService {
     private ICartoesRepository cartoesRepository;
     public HomeResponse getHome(long idCliente, int mes, int ano){
         var home = new HomeResponse();
-        double despesas = despesasRepository.getDespesasHome(idCliente, mes, ano);
-        double receitas = receitasRepository.getDespesasHome(idCliente, mes, ano);
-        double despesaCartao = despesasRepository.getDespesasCartaoHome(idCliente, mes, ano);
+
+        double despesasPagas = despesasRepository.getDespesasPagas(idCliente, mes, ano);
+        double despesas = despesasRepository.getDespesas(idCliente, mes, ano);
+        double receitas = receitasRepository.getReceitasMes(idCliente, mes, ano);
+        double despesasCartao = despesasRepository.getDespesasCartao(idCliente, mes, ano);
+
         List<Cartao> cartoes = cartoesRepository.findByIdCliente(idCliente);
         List<CartaoHome> cartoesHome = new ArrayList<>();
         for (Cartao cartao : cartoes){
@@ -35,8 +38,9 @@ public class HomeService {
 
         home.setDespesas(despesas);
         home.setReceita(receitas);
-        home.setSaldo(receitas - despesas);
-//        home.setCartoes(cartoesHome);
+        home.setSaldo(receitas - despesasPagas);
+        home.setDespesaCartao(despesasCartao);
+        home.setCartoes(cartoesHome);
 
         return home;
     }

@@ -1,16 +1,16 @@
 package moca.MocaRestService.Domain.Models.Responses;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ReceitaResponse {
     public long idReceita;
     private String descricao;
     private double valor;
-    private Date data;
+    private LocalDate data;
     private long idCliente;
     private long idTipoReceita;
 
-    public ReceitaResponse(long idReceita, String descricao, double valor, Date data, long idCliente, long idTipoReceita) {
+    public ReceitaResponse(long idReceita, String descricao, double valor, LocalDate data, long idCliente, long idTipoReceita) {
         this.idReceita = idReceita;
         this.descricao = descricao;
         this.valor = valor;
@@ -43,11 +43,11 @@ public class ReceitaResponse {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

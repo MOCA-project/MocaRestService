@@ -1,18 +1,18 @@
 package moca.MocaRestService.Domain.Models.Responses;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ExpenseResponse {
     private long idDespesa;
     private String descricao;
     private double valor;
-    private Date data;
+    private LocalDate data;
     private Boolean isPaid;
     private Boolean isParcela;
     private Long idCliente;
     private Long idTipoDespesa;
 
-    public ExpenseResponse(long idDespesa, String descricao, double valor, Date data, Boolean isPaid, Boolean isParcela, Long idCliente, Long idTipoDespesa) {
+    public ExpenseResponse(long idDespesa, String descricao, double valor, LocalDate data, Boolean isPaid, Boolean isParcela, Long idCliente, Long idTipoDespesa) {
         this.idDespesa = idDespesa;
         this.descricao = descricao;
         this.valor = valor;
@@ -47,11 +47,11 @@ public class ExpenseResponse {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
