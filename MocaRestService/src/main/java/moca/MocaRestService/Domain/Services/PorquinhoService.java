@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
+import moca.MocaRestService.Data.Entities.Despesa;
 import moca.MocaRestService.Data.Entities.Porquinho;
 import moca.MocaRestService.Data.Repositories.IClienteRepository;
 import moca.MocaRestService.Data.Repositories.IPorquinhoRepository;
@@ -63,23 +64,39 @@ public class PorquinhoService {
     }
 
     public ResponseEntity<Void> retirarValor(long idCliente, long idPorquinho, double valorRetirar){
-        if (porquinhoRepository.existsById(idPorquinho) && clienteRepository.existsById(idCliente)){
-            Porquinho porquinho = porquinhoRepository.getReferenceById(idPorquinho);
-            porquinho.setValorAtual(porquinho.getValorAtual() - valorRetirar);
-            return ResponseEntity.status(200).build();
-        }
-        return ResponseEntity.status(404).build();
+        var response = porquinhoRepository.findById(idPorquinho);
+        response.ifPresent((Porquinho result) -> {
+            result.setValorAtual(result.getValorAtual() - valorRetirar);
+            porquinhoRepository.save(result);
+        });
+        return ResponseEntity.status(200).build();
     }
 
     public ResponseEntity<Void> adicionarValor(long idCliente, long idPorquinho, double valorAdicionar){
-        if (porquinhoRepository.existsById(idPorquinho) && clienteRepository.existsById(idCliente)){
-            Porquinho porquinho = porquinhoRepository.getReferenceById(idPorquinho);
-            porquinho.setValorAtual(porquinho.getValorAtual() + valorAdicionar);
-            return ResponseEntity.status(200).build();
-        }
-        return ResponseEntity.status(404).build();
+//        if (porquinhoRepository.existsById(idPorquinho) && clienteRepository.existsById(idCliente)){
+//            Porquinho porquinho = porquinhoRepository.getReferenceById(idPorquinho);
+//            porquinho.setValorAtual(porquinho.getValorAtual() + valorAdicionar);
+//            return ResponseEntity.status(200).build();
+//        }
+        //return ResponseEntity.status(404).build();
+        var response = porquinhoRepository.findById(idPorquinho);
+        response.ifPresent((Porquinho result) -> {
+            result.setValorAtual(result.getValorAtual() + valorAdicionar);
+            porquinhoRepository.save(result);
+        });
+        return ResponseEntity.status(200).build();
     }
 
+    public ResponseEntity<Void> finalizarPorquinho (long idCliente, long idPorquinho){
+        var response = porquinhoRepository.findById(idPorquinho);
+        response.ifPresent((Porquinho result) -> {
+            if (result.getValorAtual() == result.getValorFinal()){
+                result.setConcluido(true);
+                porquinhoRepository.save(result);
+            }
+        });
+        return ResponseEntity.status(200).build();
+    }
     public ResponseEntity<Void> excluirPorquinho(long idCliente, long idPorquinho){
         if (porquinhoRepository.existsById(idPorquinho) && clienteRepository.existsById(idCliente)) {
             porquinhoRepository.deleteById(idPorquinho);
@@ -87,5 +104,19 @@ public class PorquinhoService {
         }
 
         return ResponseEntity.status(404).build();
+    }
+
+    //terminar
+    public ResponseEntity<Double> mostrarPorcentagem(long idCliente, long idPorquinho){
+        var response = porquinhoRepository.findById(idPorquinho);
+        response.ifPresent((Porquinho result) -> {
+            double total = result.getValorFinal();
+
+            if (result.getValorAtual() == result.getValorFinal()){
+                result.setConcluido(true);
+                porquinhoRepository.save(result);
+            }
+        });
+        return ResponseEntity.status(200).build();
     }
 }
