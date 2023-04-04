@@ -21,9 +21,4 @@ public class ReceitaController {
     public ReceitaResponse add(@RequestBody ReceitaRequest request){
         return service.add(request);
     }
-
-//    @DeleteMapping("{idReceita}")
-//    public boolean delete(@PathVariable Long idReceita){
-//        return service.delete(idReceita);
-//    }
 }

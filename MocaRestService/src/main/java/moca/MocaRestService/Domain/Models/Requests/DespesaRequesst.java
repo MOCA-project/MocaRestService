@@ -10,6 +10,9 @@ public class DespesaRequesst {
     private boolean isParcela;
     private Long idCliente;
     private Long idTipoDespesa;
+    private boolean isCartao;
+
+    private Long idCartao;
 
     public String getDescricao() {
         return descricao;
@@ -65,5 +68,21 @@ public class DespesaRequesst {
 
     public void setIdTipoDespesa(Long idTipoDespesa) {
         this.idTipoDespesa = idTipoDespesa;
+    }
+
+    public boolean getIsCartao() {
+        return isCartao;
+    }
+
+    public void setIsCartao(boolean cartao) {
+        isCartao = cartao;
+    }
+
+    public Long getIdCartao() {
+        return idCartao;
+    }
+
+    public void setIdCartao(Long idCartao) {
+        this.idCartao = idCartao;
     }
 }

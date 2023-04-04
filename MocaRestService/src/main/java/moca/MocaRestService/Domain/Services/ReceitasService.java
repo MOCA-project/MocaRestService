@@ -20,6 +20,7 @@ public class ReceitasService {
         receita.setIdCliente(request.getIdCliente());
         receita.setIdTipoReceita(request.getIdTipoReceita());
 
+
         var result = repository.save(receita);
 
         return new ReceitaResponse(

@@ -5,7 +5,6 @@ import moca.MocaRestService.Data.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
-import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +27,8 @@ public class DespesasService {
         despesa.setParcela(request.isParcela());
         despesa.setIdCliente(request.getIdCliente());
         despesa.setValor(request.getValor());
+        despesa.setCartao(request.getIsCartao());
+        despesa.setIdCartao(request.getIdCartao());
 
         var response = expenseRepository.save(despesa);
 
@@ -43,7 +44,6 @@ public class DespesasService {
     }
 
     public ExpenseResponse pay(Long idDespesa){
-        // Atualizando a despesa
         var response = expenseRepository.findById(idDespesa);
         response.ifPresent((Despesa result) -> {
             result.setPaid(true);

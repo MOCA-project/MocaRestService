@@ -12,9 +12,6 @@ public class Cartao {
     @Column(name = "id_cartao")
     private long idCartao;
     @Basic
-    @Column(name = "saldo")
-    private double saldo;
-    @Basic
     @Column(name = "limite")
     private double limite;
     @Basic
@@ -23,6 +20,19 @@ public class Cartao {
     @Basic
     @Column(name = "id_tipo")
     private Long idTipo;
+    @Basic
+    @Column(name = "id_cor_cartao")
+    private Long idCorCartao;
+    @Basic
+    @Column(name = "bandeira")
+    private String bandeira;
+    @Basic
+    @Column(name = "apelido")
+    private String apelido;
+
+    @Basic
+    @Column(name = "vencimento")
+    private String vencimento;
 
     public long getIdCartao() {
         return idCartao;
@@ -30,14 +40,6 @@ public class Cartao {
 
     public void setIdCartao(long idCartao) {
         this.idCartao = idCartao;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
     }
 
     public double getLimite() {
@@ -64,16 +66,35 @@ public class Cartao {
         this.idTipo = idTipo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cartao cartao = (Cartao) o;
-        return idCartao == cartao.idCartao && Objects.equals(saldo, cartao.saldo) && Objects.equals(limite, cartao.limite) && Objects.equals(idCliente, cartao.idCliente) && Objects.equals(idTipo, cartao.idTipo);
+    public Long getIdCorCartao() {
+        return idCorCartao;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCartao, saldo, limite, idCliente, idTipo);
+    public void setIdCorCartao(Long idCorCartao) {
+        this.idCorCartao = idCorCartao;
+    }
+
+    public String getBandeira() {
+        return bandeira;
+    }
+
+    public void setBandeira(String bandeira) {
+        this.bandeira = bandeira;
+    }
+
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
+
+    public String getVencimento() {
+        return vencimento;
+    }
+
+    public void setVencimento(String vencimento) {
+        this.vencimento = vencimento;
     }
 }

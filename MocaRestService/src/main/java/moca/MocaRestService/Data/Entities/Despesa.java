@@ -6,7 +6,6 @@ import java.util.Objects;
 
 @Entity
 public class Despesa {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_despesa")
@@ -35,6 +34,9 @@ public class Despesa {
     @Basic
     @Column(name = "is_cartao")
     private boolean isCartao;
+    @Basic
+    @Column(name = "id_cartao")
+    private Long idCartao;
 
     public long getIdDespesa() {
         return idDespesa;
@@ -106,6 +108,14 @@ public class Despesa {
 
     public void setCartao(boolean cartao) {
         isCartao = cartao;
+    }
+
+    public Long isIdCartao() {
+        return idCartao;
+    }
+
+    public void setIdCartao(Long idCartao) {
+        this.idCartao = idCartao;
     }
 
     @Override
