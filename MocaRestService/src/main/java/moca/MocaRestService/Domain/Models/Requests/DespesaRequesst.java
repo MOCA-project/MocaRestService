@@ -11,7 +11,6 @@ public class DespesaRequesst {
     private Long idCliente;
     private Long idTipoDespesa;
     private boolean isCartao;
-
     private Long idCartao;
 
     public String getDescricao() {
