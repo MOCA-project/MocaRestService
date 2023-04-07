@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -73,12 +74,6 @@ public class PorquinhoService {
     }
 
     public ResponseEntity<Void> adicionarValor(long idCliente, long idPorquinho, double valorAdicionar){
-//        if (porquinhoRepository.existsById(idPorquinho) && clienteRepository.existsById(idCliente)){
-//            Porquinho porquinho = porquinhoRepository.getReferenceById(idPorquinho);
-//            porquinho.setValorAtual(porquinho.getValorAtual() + valorAdicionar);
-//            return ResponseEntity.status(200).build();
-//        }
-        //return ResponseEntity.status(404).build();
         var response = porquinhoRepository.findById(idPorquinho);
         response.ifPresent((Porquinho result) -> {
             result.setValorAtual(result.getValorAtual() + valorAdicionar);
@@ -107,16 +102,12 @@ public class PorquinhoService {
     }
 
     //terminar
-    public ResponseEntity<Double> mostrarPorcentagem(long idCliente, long idPorquinho){
+    public double mostrarPorcentagem(long idCliente, long idPorquinho){
         var response = porquinhoRepository.findById(idPorquinho);
-        response.ifPresent((Porquinho result) -> {
-            double total = result.getValorFinal();
-
-            if (result.getValorAtual() == result.getValorFinal()){
-                result.setConcluido(true);
-                porquinhoRepository.save(result);
-            }
-        });
-        return ResponseEntity.status(200).build();
+        double porcentagem = 0.0;
+        if (response.isPresent()) {
+            porcentagem = (response.get().getValorAtual() * 100) / response.get().getValorFinal();
+        }
+        return porcentagem;
     }
 }

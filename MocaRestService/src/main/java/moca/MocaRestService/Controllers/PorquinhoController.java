@@ -44,12 +44,16 @@ public class PorquinhoController {
         return service.retirarValor(idCliente, idPorquinho, valorRetirar);
     }
 
-    @DeleteMapping("/{idCliente}/{idPorquinho}/")
+    @DeleteMapping("/{idCliente}/{idPorquinho}")
     public ResponseEntity<Void> excluirPorquinho (@PathVariable long idCliente, @PathVariable long idPorquinho){
         return service.excluirPorquinho(idCliente, idPorquinho);
     }
 
-    //porcentagem
+
+    @GetMapping ("/mostrarPorcentagem/{idCliente}/{idPorquinho}")
+    public double mostrarPorcentagem(@PathVariable long idCliente, @PathVariable long idPorquinho){
+        return service.mostrarPorcentagem(idCliente, idPorquinho);
+    }
 
     @PutMapping("/finalizarPorquinho/{idCliente}/{idPorquinho}")
     public ResponseEntity<Void> finalizarPorquinho (@PathVariable long idCliente, @PathVariable long idPorquinho){
