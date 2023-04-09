@@ -1,6 +1,5 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Data.Entities.Despesa;
 import moca.MocaRestService.Data.Entities.Porquinho;
 import moca.MocaRestService.Data.Repositories.IClienteRepository;
 import moca.MocaRestService.Data.Repositories.IPorquinhoRepository;
