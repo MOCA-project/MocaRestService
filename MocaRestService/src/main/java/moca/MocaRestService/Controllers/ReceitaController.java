@@ -6,19 +6,21 @@ import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
 import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import moca.MocaRestService.Domain.Services.ReceitasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/incomes/")
+@RequestMapping("/receitas/")
 public class ReceitaController {
 
     @Autowired
     private ReceitasService service;
 
     @PostMapping
-    public ReceitaResponse add(@RequestBody ReceitaRequest request){
-        return service.add(request);
+    public ResponseEntity<ReceitaResponse> add(@RequestBody ReceitaRequest request){
+        var result =  service.add(request);
+        return ResponseEntity.status(201).body(result);
     }
 }

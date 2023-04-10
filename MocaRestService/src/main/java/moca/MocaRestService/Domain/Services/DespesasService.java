@@ -43,7 +43,7 @@ public class DespesasService {
                 response.getIdTipoDespesa());
     }
 
-    public ExpenseResponse pay(Long idDespesa){
+    public ExpenseResponse pagar(Long idDespesa){
         var response = expenseRepository.findById(idDespesa);
         response.ifPresent((Despesa result) -> {
             result.setPaid(true);
@@ -62,7 +62,7 @@ public class DespesasService {
 
     }
 
-    public List<ExpenseResponse> installmentExpense(DespesaParceladaRequest request){
+    public List<ExpenseResponse> despesaParcelada(DespesaParceladaRequest request){
         List<ExpenseResponse> result = new ArrayList<>();
         for (int i = 0; i < request.getParcelas(); i++) {
             var dataFutura = request.getData().plusMonths(i);

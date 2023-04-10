@@ -8,9 +8,7 @@ import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -24,7 +22,7 @@ public class PorquinhoService {
     public PorquinhoResponse addPorquinho (PorquinhoRequest request){
         Porquinho newPorquinho = new Porquinho();
 
-        //nova classe do banco, id é automatico
+
         newPorquinho.setConcluido(request.getConcluido());
         newPorquinho.setIdCliente(request.getIdCliente());
         //newPorquinho.setIdObj(request.getIdObj());

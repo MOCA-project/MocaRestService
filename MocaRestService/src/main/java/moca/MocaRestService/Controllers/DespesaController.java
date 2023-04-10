@@ -5,34 +5,39 @@ import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
 import moca.MocaRestService.Domain.Services.DespesasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/expenses/")
+@RequestMapping("/despesas/")
 public class DespesaController {
 
     @Autowired
     private DespesasService service;
 
     @PostMapping
-    public ExpenseResponse add(@RequestBody DespesaRequesst request){
-       return service.add(request);
+    public  ResponseEntity<ExpenseResponse> add(@RequestBody DespesaRequesst request){
+        var result = service.add(request);
+        return ResponseEntity.status(201).body(result);
     }
 
-    @PostMapping("installment")
-    public List<ExpenseResponse> add(@RequestBody DespesaParceladaRequest request){
-        return service.installmentExpense(request);
+    @PostMapping("parcelada")
+    public ResponseEntity<List<ExpenseResponse>> add(@RequestBody DespesaParceladaRequest request){
+        var result =  service.despesaParcelada(request);
+        return ResponseEntity.status(201).body(result);
     }
 
-    @PatchMapping("{idDespesa}")
-    public ExpenseResponse pay(@PathVariable Long idDespesa){
-        return service.pay(idDespesa);
+    @PatchMapping("{idDespesa}-pagar")
+    public ResponseEntity<ExpenseResponse> pay(@PathVariable Long idDespesa){
+        var result =  service.pagar(idDespesa);
+        return ResponseEntity.status(200).body(result);
     }
 
     @DeleteMapping("{idDespesa}")
-    public boolean delete(@PathVariable Long idDespesa){
-        return service.delete(idDespesa);
+    public ResponseEntity<Void> delete(@PathVariable Long idDespesa){
+        service.delete(idDespesa);
+        return ResponseEntity.status(200).build();
     }
 }

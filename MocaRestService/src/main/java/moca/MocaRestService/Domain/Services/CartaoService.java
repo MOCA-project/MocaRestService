@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
+import com.twilio.http.Response;
 import moca.MocaRestService.Data.Entities.Cartao;
 import moca.MocaRestService.Data.Repositories.ICartoesRepository;
 import moca.MocaRestService.Data.Repositories.IDespesasRepository;
@@ -8,6 +9,7 @@ import moca.MocaRestService.Domain.Models.Responses.CartaoResponse;
 import moca.MocaRestService.Domain.Models.Responses.CartoesHomeCartao;
 import moca.MocaRestService.Domain.Models.Responses.CartoesHomeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,6 +40,7 @@ public class CartaoService {
     public CartoesHomeResponse get(long idCliente, int mes, int ano) {
         var response = new CartoesHomeResponse();
         var cartoes = repository.findAll();
+
         for (Cartao cartao : cartoes){
             var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano,
                     cartao.getIdCartao());
