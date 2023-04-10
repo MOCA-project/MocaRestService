@@ -1,14 +1,13 @@
 package moca.MocaRestService.Data.Entities;
 
-import jakarta.persistence.*;
-
-import java.sql.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 public class Despesa {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_despesa")
     private long idDespesa;
     @Basic
@@ -16,10 +15,10 @@ public class Despesa {
     private String descricao;
     @Basic
     @Column(name = "valor")
-    private Integer valor;
+    private double valor;
     @Basic
     @Column(name = "data")
-    private Date data;
+    private LocalDate data;
     @Basic
     @Column(name = "is_paid")
     private Boolean isPaid;
@@ -32,6 +31,12 @@ public class Despesa {
     @Basic
     @Column(name = "id_tipo_despesa")
     private Long idTipoDespesa;
+    @Basic
+    @Column(name = "is_cartao")
+    private boolean isCartao;
+    @Basic
+    @Column(name = "id_cartao")
+    private Long idCartao;
 
     public long getIdDespesa() {
         return idDespesa;
@@ -49,19 +54,19 @@ public class Despesa {
         this.descricao = descricao;
     }
 
-    public Integer getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -95,6 +100,22 @@ public class Despesa {
 
     public void setIdTipoDespesa(Long idTipoDespesa) {
         this.idTipoDespesa = idTipoDespesa;
+    }
+
+    public boolean isCartao() {
+        return isCartao;
+    }
+
+    public void setCartao(boolean cartao) {
+        isCartao = cartao;
+    }
+
+    public Long isIdCartao() {
+        return idCartao;
+    }
+
+    public void setIdCartao(Long idCartao) {
+        this.idCartao = idCartao;
     }
 
     @Override

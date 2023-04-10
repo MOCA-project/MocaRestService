@@ -5,14 +5,15 @@ import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetai
 import moca.MocaRestService.CrossCutting.TwilioIntegration.Interfaces.ITwilioService;
 import moca.MocaRestService.CrossCutting.TwilioIntegration.Models.SmsSenderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/notification/")
-public class NotificationController {
+@RequestMapping("/notificacoes/")
+public class NotificacoesController {
 
     @Autowired
     private ITwilioService twilioService;
@@ -20,12 +21,14 @@ public class NotificationController {
     private IEmailSenderService emailService;
 
     @PostMapping("sms")
-    public String sendSms(@RequestBody SmsSenderRequest request){
-        return twilioService.SendSms(request);
+    public ResponseEntity<String> sendSms(@RequestBody SmsSenderRequest request){
+        var result =  twilioService.SendSms(request);
+        return ResponseEntity.status(201).body(result);
     }
 
     @PostMapping("email")
-    public String sendEmail(@RequestBody EmailDetails emailDetails) throws Exception {
-        return emailService.sendMail(emailDetails);
+    public ResponseEntity<String> sendEmail(@RequestBody EmailDetails emailDetails) throws Exception {
+        var result =  emailService.sendMail(emailDetails);
+        return ResponseEntity.status(201).body(result);
     }
 }

@@ -1,25 +1,28 @@
 package moca.MocaRestService.Data.Entities;
 
-import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import javax.persistence.*;
 
 @Entity
 public class Receita {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_receita")
+
     private long idReceita;
     @Basic
     @Column(name = "descricao")
     private String descricao;
     @Basic
     @Column(name = "valor")
-    private Integer valor;
+    private double valor;
     @Basic
     @Column(name = "data")
-    private Date data;
+    private LocalDate data;
     @Basic
     @Column(name = "id_cliente")
     private Long idCliente;
@@ -43,19 +46,19 @@ public class Receita {
         this.descricao = descricao;
     }
 
-    public Integer getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
