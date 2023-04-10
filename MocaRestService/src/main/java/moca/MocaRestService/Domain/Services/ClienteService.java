@@ -1,6 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
+import moca.MocaRestService.Domain.Helper.ListaObj;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioLoginDTO;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -70,8 +74,20 @@ public class ClienteService {
         return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token);
     }
 
-    public List<Cliente> getAll(){
-        return clienteRepository.findAll();
+    public List<Cliente> getAll() {
+        List<Cliente> clientes = new ArrayList<>();
+        var result = clienteRepository.findAll();
+        ListaObj<Cliente> listaClientes = new ListaObj<>(result.size());
+        listaClientes.adicionaAll(result);
+
+        for (int i = 0; i < listaClientes.getTamanho(); i++) {
+            clientes.add(listaClientes.getElemento(i));
+        }
+
+        // Ordena a lista de clientes pelo nome
+        Collections.sort(clientes, Comparator.comparing(Cliente::getNome));
+
+        return clientes;
     }
 
 
