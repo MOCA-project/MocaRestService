@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/noticacoes/")
-public class NotificationController {
+@RequestMapping("/notificacoes/")
+public class NotificacoesController {
 
     @Autowired
     private ITwilioService twilioService;

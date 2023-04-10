@@ -1,16 +1,8 @@
 package moca.MocaRestService.CrossCutting.TwilioIntegration.Models;
 
 public class SmsSenderRequest {
-    public String to;
+    public String destinatario;
     public String message;
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
 
     public String getMessage() {
         return message;
@@ -18,5 +10,13 @@ public class SmsSenderRequest {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getDestinatario() {
+        return destinatario;
+    }
+
+    public void setDestinatario(String destinatario) {
+        this.destinatario = destinatario;
     }
 }

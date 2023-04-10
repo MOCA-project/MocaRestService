@@ -16,11 +16,15 @@ public class TwilioService  implements ITwilioService {
     public String SendSms(SmsSenderRequest request) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
-                        new com.twilio.type.PhoneNumber(request.getTo()),
+                        new com.twilio.type.PhoneNumber(request.getDestinatario()),
                         new com.twilio.type.PhoneNumber("+12677622210"),
-                        request.getMessage())
+                        GetLembrete())
                 .create();
 
-        return message.getSid();
+        return message.getStatus().toString();
+    }
+
+    public static String GetLembrete(){
+        return "Sabemos o quão difícil é organizar suas finanças, por isso queremos te ajudar! \\nNão se esqueça de cadastrar seus gastos em nossa plataforma. \\nRegistrar todas as despesas é fundamental para ter uma visão clara de suas finanças e poder tomar decisões mais inteligentes. \\nAproveite todas as funcionalidades da MOCA. \\n\\nConte conosco!";
     }
 }

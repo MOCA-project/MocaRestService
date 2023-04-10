@@ -45,7 +45,10 @@ public class SecurityConfiguracao {
             new AntPathRequestMatcher("/api/public/authenticate"),
             new AntPathRequestMatcher("/actuator/*"),
             new AntPathRequestMatcher("/swagger-ui/**"),
-            new AntPathRequestMatcher("/clients/**"),
+            new AntPathRequestMatcher("/usuario/**"),
+            new AntPathRequestMatcher("/notificacoes/**"),
+            // Descomente para desabilitar a necessidade do token
+            new AntPathRequestMatcher("/**"),
             new AntPathRequestMatcher("/h2-console/**")
     };
 

@@ -27,6 +27,7 @@ public class ExtratoService {
         var response = new ExtratoResponse();
         var receitas = receitasRepository.getReceitasMesLista(idCliente, mes, ano);
         var despesas = despesasRepository.getDespesasLista(idCliente, mes, ano);
+
         for (Receita receita: receitas) {
             int idTipo = receita.getIdTipoReceita().intValue();
 
