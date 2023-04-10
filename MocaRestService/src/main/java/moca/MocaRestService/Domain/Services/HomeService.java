@@ -1,11 +1,11 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Data.Entities.Cartao;
-import moca.MocaRestService.Data.Entities.Despesa;
-import moca.MocaRestService.Data.Entities.Receita;
-import moca.MocaRestService.Data.Repositories.ICartoesRepository;
-import moca.MocaRestService.Data.Repositories.IDespesasRepository;
-import moca.MocaRestService.Data.Repositories.IReceitasRepository;
+import moca.MocaRestService.Infrastructure.Entities.Cartao;
+import moca.MocaRestService.Infrastructure.Entities.Despesa;
+import moca.MocaRestService.Infrastructure.Entities.Receita;
+import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
+import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
+import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
 import moca.MocaRestService.Domain.Models.Responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

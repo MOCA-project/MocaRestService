@@ -1,6 +1,6 @@
 package moca.MocaRestService.Controllers;
 
-import moca.MocaRestService.Data.Entities.Porquinho;
+import moca.MocaRestService.Infrastructure.Entities.Porquinho;
 import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;
 import moca.MocaRestService.Domain.Services.PorquinhoService;

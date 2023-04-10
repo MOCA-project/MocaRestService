@@ -1,14 +1,14 @@
-package moca.MocaRestService.Domain.Helper;
+package moca.MocaRestService.Domain.Helper.Enums;
 
 public enum TipoDespesaEnum {
-    Morádia(1, "Morádia"),
-    Alimentação(2, "Alimentação"),
+    Moradia(1, "Morádia"),
+    Alimentacao(2, "Alimentação"),
     Transporte(3, "Transporte"),
-    Saúde(4, "Saúde"),
-    Educação(5, "Educação"),
+    Saude(4, "Saúde"),
+    Educacao(5, "Educação"),
     Lazer(6, "Lazer"),
-    Vestuário(7, "Vestuário"),
-    Dívidas(8, "Dívidas"),
+    Vestuario(7, "Vestuário"),
+    Dividas(8, "Dívidas"),
     Impostos(9, "Impostos"),
     Outros(10, "Outros");
 

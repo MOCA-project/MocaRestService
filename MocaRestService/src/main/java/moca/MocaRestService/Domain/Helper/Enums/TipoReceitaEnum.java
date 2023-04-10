@@ -1,4 +1,4 @@
-package moca.MocaRestService.Domain.Helper;
+package moca.MocaRestService.Domain.Helper.Enums;
 
 public enum TipoReceitaEnum {
     Salário(1, "Salário"),

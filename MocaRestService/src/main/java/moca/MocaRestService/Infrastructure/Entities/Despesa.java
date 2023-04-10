@@ -1,4 +1,4 @@
-package moca.MocaRestService.Data.Entities;
+package moca.MocaRestService.Infrastructure.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;

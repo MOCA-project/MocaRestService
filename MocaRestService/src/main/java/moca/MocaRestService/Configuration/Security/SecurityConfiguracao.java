@@ -1,4 +1,5 @@
-package moca.MocaRestService.Configuration;
+package moca.MocaRestService.Configuration.Security;
+import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
 import moca.MocaRestService.Domain.Services.AutenticacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

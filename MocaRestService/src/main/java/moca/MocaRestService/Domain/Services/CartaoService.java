@@ -1,15 +1,13 @@
 package moca.MocaRestService.Domain.Services;
 
-import com.twilio.http.Response;
-import moca.MocaRestService.Data.Entities.Cartao;
-import moca.MocaRestService.Data.Repositories.ICartoesRepository;
-import moca.MocaRestService.Data.Repositories.IDespesasRepository;
+import moca.MocaRestService.Infrastructure.Entities.Cartao;
+import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
+import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.CartaoRequest;
 import moca.MocaRestService.Domain.Models.Responses.CartaoResponse;
 import moca.MocaRestService.Domain.Models.Responses.CartoesHomeCartao;
 import moca.MocaRestService.Domain.Models.Responses.CartoesHomeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service

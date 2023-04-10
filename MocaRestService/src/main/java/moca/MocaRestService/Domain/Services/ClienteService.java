@@ -1,17 +1,13 @@
 package moca.MocaRestService.Domain.Services;
 
-import com.twilio.type.Client;
-import moca.MocaRestService.Configuration.GerenciadorTokenJwt;
-import moca.MocaRestService.Data.Entities.Cliente;
-import moca.MocaRestService.Data.Entities.Despesa;
-import moca.MocaRestService.Data.Entities.Porquinho;
-import moca.MocaRestService.Data.Repositories.IClienteRepository;
+import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
+import moca.MocaRestService.Infrastructure.Entities.Cliente;
+import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioLoginDTO;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioTokenDTO;
 import moca.MocaRestService.Domain.Models.Requests.ClienteRequest;
 import moca.MocaRestService.Domain.Models.Responses.ClienteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
