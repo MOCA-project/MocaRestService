@@ -1,7 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Data.Entities.Cliente;
-import moca.MocaRestService.Data.Repositories.IClienteRepository;
+import moca.MocaRestService.Infrastructure.Entities.Cliente;
+import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Autenticacao.UsuariosDetalhes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

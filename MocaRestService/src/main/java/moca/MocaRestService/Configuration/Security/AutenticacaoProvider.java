@@ -1,4 +1,4 @@
-package moca.MocaRestService.Configuration;
+package moca.MocaRestService.Configuration.Security;
 
 import moca.MocaRestService.Domain.Services.AutenticacaoService;
 import org.springframework.security.authentication.AuthenticationProvider;

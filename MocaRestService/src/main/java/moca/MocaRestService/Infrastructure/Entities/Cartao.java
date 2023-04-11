@@ -1,9 +1,6 @@
-package moca.MocaRestService.Data.Entities;
+package moca.MocaRestService.Infrastructure.Entities;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Objects;
 
 @Entity
 public class Cartao {

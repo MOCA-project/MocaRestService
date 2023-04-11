@@ -1,8 +1,8 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Data.Entities.Porquinho;
-import moca.MocaRestService.Data.Repositories.IClienteRepository;
-import moca.MocaRestService.Data.Repositories.IPorquinhoRepository;
+import moca.MocaRestService.Infrastructure.Entities.Porquinho;
+import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
+import moca.MocaRestService.Infrastructure.Repositories.IPorquinhoRepository;
 import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;
 import org.springframework.beans.factory.annotation.Autowired;

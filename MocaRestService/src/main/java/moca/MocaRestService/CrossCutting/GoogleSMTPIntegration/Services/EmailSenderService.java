@@ -1,17 +1,19 @@
 package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Services;
 
+
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Interfaces.IEmailSenderService;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetails;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Utils.HtmlHelper;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.Properties;
 
 @Service
 public class EmailSenderService implements IEmailSenderService {

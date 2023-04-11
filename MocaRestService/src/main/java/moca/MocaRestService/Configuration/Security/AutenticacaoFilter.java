@@ -1,6 +1,7 @@
-package moca.MocaRestService.Configuration;
+package moca.MocaRestService.Configuration.Security;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
 import moca.MocaRestService.Domain.Services.AutenticacaoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

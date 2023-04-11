@@ -1,7 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Data.Entities.Despesa;
-import moca.MocaRestService.Data.Repositories.IDespesasRepository;
+import moca.MocaRestService.Infrastructure.Entities.Despesa;
+import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;

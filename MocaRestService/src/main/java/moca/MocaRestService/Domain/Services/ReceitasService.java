@@ -1,7 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Data.Entities.Receita;
-import moca.MocaRestService.Data.Repositories.IReceitasRepository;
+import moca.MocaRestService.Infrastructure.Entities.Receita;
+import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
 import moca.MocaRestService.Domain.Models.Requests.ReceitaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import org.springframework.beans.factory.annotation.Autowired;

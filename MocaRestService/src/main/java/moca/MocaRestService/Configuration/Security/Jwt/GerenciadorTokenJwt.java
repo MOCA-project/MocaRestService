@@ -1,4 +1,4 @@
-package moca.MocaRestService.Configuration;
+package moca.MocaRestService.Configuration.Security.Jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

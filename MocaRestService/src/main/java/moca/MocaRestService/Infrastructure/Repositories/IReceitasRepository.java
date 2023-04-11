@@ -1,6 +1,6 @@
-package moca.MocaRestService.Data.Repositories;
+package moca.MocaRestService.Infrastructure.Repositories;
 
-import moca.MocaRestService.Data.Entities.Receita;
+import moca.MocaRestService.Infrastructure.Entities.Receita;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

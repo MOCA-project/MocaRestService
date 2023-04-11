@@ -1,27 +1,25 @@
-package moca.MocaRestService.Data.Entities;
-
-//import jakarta.persistence.*;
+package moca.MocaRestService.Infrastructure.Entities;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tp_despesa", schema = "dbo", catalog = "moca")
-public class TpDespesa {
+@Table(name = "tp_receita", schema = "dbo", catalog = "moca")
+public class TpReceita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id_tp_despesa")
-    private long idTpDespesa;
+    @Column(name = "id_tp_receita")
+    private long idTpReceita;
     @Basic
     @Column(name = "descricao")
     private String descricao;
 
-    public long getIdTpDespesa() {
-        return idTpDespesa;
+    public long getIdTpReceita() {
+        return idTpReceita;
     }
 
-    public void setIdTpDespesa(long idTpDespesa) {
-        this.idTpDespesa = idTpDespesa;
+    public void setIdTpReceita(long idTpReceita) {
+        this.idTpReceita = idTpReceita;
     }
 
     public String getDescricao() {
@@ -36,12 +34,12 @@ public class TpDespesa {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TpDespesa tpDespesa = (TpDespesa) o;
-        return idTpDespesa == tpDespesa.idTpDespesa && Objects.equals(descricao, tpDespesa.descricao);
+        TpReceita tpReceita = (TpReceita) o;
+        return idTpReceita == tpReceita.idTpReceita && Objects.equals(descricao, tpReceita.descricao);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTpDespesa, descricao);
+        return Objects.hash(idTpReceita, descricao);
     }
 }

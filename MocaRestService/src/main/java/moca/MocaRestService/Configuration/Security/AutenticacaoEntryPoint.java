@@ -1,4 +1,4 @@
-package moca.MocaRestService.Configuration;
+package moca.MocaRestService.Configuration.Security;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
