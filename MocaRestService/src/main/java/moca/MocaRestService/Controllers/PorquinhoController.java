@@ -1,5 +1,12 @@
 package moca.MocaRestService.Controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jdk.jfr.ContentType;
 import moca.MocaRestService.Infrastructure.Entities.Porquinho;
 import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;
@@ -10,18 +17,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@Tag(name = "Porquinhos", description = "Grupo de requisições de porquinhos")
 @RestController
-@RequestMapping("/porquinhos/")
+@RequestMapping("api/porquinhos/")
 public class PorquinhoController {
 
     @Autowired
     PorquinhoService service;
 
+
+    @Operation(summary = "Cria um porquinho na base de dados", responses = {
+            @ApiResponse(responseCode = "200")
+    })
     @PostMapping
     public PorquinhoResponse add(@RequestBody PorquinhoRequest request){
         return service.addPorquinho(request);
     }
 
+    @Operation(summary = "Retorna todos os porquihnhos", responses = {
+            @ApiResponse(responseCode = "200")
+    })
     @GetMapping
     public List<Porquinho> get(){
         return service.getAllPorquinho();

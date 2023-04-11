@@ -85,7 +85,7 @@ public class ClienteService {
         }
 
         // Ordena a lista de clientes pelo nome
-        Collections.sort(clientes, Comparator.comparing(Cliente::getNome));
+        clientes.sort(Comparator.comparing(Cliente::getNome));
 
         return clientes;
     }

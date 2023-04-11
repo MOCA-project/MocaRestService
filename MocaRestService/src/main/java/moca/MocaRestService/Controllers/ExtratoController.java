@@ -1,5 +1,8 @@
 package moca.MocaRestService.Controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import moca.MocaRestService.Domain.Models.Responses.ExtratoResponse;
 import moca.MocaRestService.Domain.Models.Responses.HomeResponse;
 import moca.MocaRestService.Domain.Services.ExtratoService;
@@ -10,12 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Extrato", description = "Grupo de requisições de extrato")
 @RestController
-@RequestMapping("/extrato/")
+@RequestMapping("api/extrato/")
 public class ExtratoController {
 
     @Autowired
     ExtratoService service;
+
+    @Operation(summary = "Retorna o extrato do cliente referente a data solicitada", responses = {
+            @ApiResponse(responseCode = "200")
+    })
     @GetMapping("{idCliente}/{mes}/{ano}")
     public ResponseEntity<ExtratoResponse> get(@PathVariable long idCliente,
                                               @PathVariable int mes,
