@@ -72,15 +72,11 @@ public class EmailSenderService implements IEmailSenderService {
             messageHelper.setFrom(username);
             messageHelper.setTo(details.getDestinatario());
             messageHelper.setSubject(details.getAssunto());
-            messageHelper.setText(getHtml(), true);
+            messageHelper.setText(HtmlHelper.getEmailHtml(), true);
             mailSender.send(mimeMessage);
             return "Email enviado com sucesso";
-        } catch (MailException ex) {
+        } catch (Exception ex) {
             throw new CustomException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    private String getHtml() throws IOException {
-        return HtmlHelper.getEmailHmtml();
     }
 }
