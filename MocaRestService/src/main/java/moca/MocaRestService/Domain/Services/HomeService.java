@@ -4,6 +4,7 @@ import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
+import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
 import moca.MocaRestService.Domain.Models.Responses.*;
@@ -24,6 +25,8 @@ public class HomeService {
     @Autowired
     private ICartoesRepository cartoesRepository;
     public HomeResponse getHome(long idCliente, int mes, int ano){
+        clienteService.foundClienteOrThrow(idCliente);
+
         var home = new HomeResponse();
         double despesasPagas = despesasRepository.getDespesasPagas(idCliente, mes, ano);
         double despesas = despesasRepository.getDespesas(idCliente, mes, ano);

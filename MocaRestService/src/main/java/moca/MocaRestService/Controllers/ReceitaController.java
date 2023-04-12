@@ -30,4 +30,23 @@ public class ReceitaController {
         var result =  service.add(request);
         return ResponseEntity.status(201).body(result);
     }
+
+    @Operation(summary = "Cadastra uma receita fixa na base de dados", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @PostMapping("fixa")
+    public ResponseEntity<List<ReceitaResponse>> addFixa(@RequestBody ReceitaRequest request){
+        var result = service.postReceitaFixa(request);
+        return ResponseEntity.status(201).body(result);
+    }
+
+    @Operation(summary = "Remove uma receita na base de dados", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404")
+    })
+    @DeleteMapping("{idDespesa}")
+    public ResponseEntity<Void> delete(@PathVariable long idDespesa){
+        service.removeReceita(idDespesa);
+        return ResponseEntity.status(200).build();
+    }
 }

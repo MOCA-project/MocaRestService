@@ -1,11 +1,13 @@
 package moca.MocaRestService.Domain.Services;
 
+import moca.MocaRestService.Domain.Helper.CustomException;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,22 +46,23 @@ public class DespesasService {
     }
 
     public ExpenseResponse pagar(Long idDespesa){
-        var response = expenseRepository.findById(idDespesa);
-        response.ifPresent((Despesa result) -> {
-            result.setPaid(true);
-            expenseRepository.save(result);
-        });
+        var despesa = expenseRepository.findById(idDespesa);
+        if (despesa.isPresent()){
+            despesa.get().setPaid(true);
+            expenseRepository.save(despesa.get());
+        }
+        else
+            throw new CustomException("Desesa não encontrada", HttpStatus.NOT_FOUND);
 
         return new ExpenseResponse(
-                response.get().getIdDespesa(),
-                response.get().getDescricao(),
-                response.get().getValor(),
-                response.get().getData(),
-                response.get().getPaid(),
-                response.get().getParcela(),
-                response.get().getIdCliente(),
-                response.get().getIdTipoDespesa());
-
+                despesa.get().getIdDespesa(),
+                despesa.get().getDescricao(),
+                despesa.get().getValor(),
+                despesa.get().getData(),
+                despesa.get().getPaid(),
+                despesa.get().getParcela(),
+                despesa.get().getIdCliente(),
+                despesa.get().getIdTipoDespesa());
     }
 
     public List<ExpenseResponse> despesaParcelada(DespesaParceladaRequest request){
@@ -89,12 +92,11 @@ public class DespesasService {
         return result;
     }
 
-    public boolean delete(Long idDespesa){
+    public void delete(Long idDespesa){
         var response = expenseRepository.findById(idDespesa);
         if (response.isPresent()) {
             expenseRepository.deleteById(idDespesa);
-            return true;
         }
-        else return false;
+        throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
     }
 }

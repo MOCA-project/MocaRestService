@@ -1,6 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
+import moca.MocaRestService.Domain.Helper.CustomException;
 import moca.MocaRestService.Domain.Helper.ListaObj;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
@@ -9,6 +10,7 @@ import moca.MocaRestService.Domain.Autenticacao.UsuarioTokenDTO;
 import moca.MocaRestService.Domain.Models.Requests.ClienteRequest;
 import moca.MocaRestService.Domain.Models.Responses.ClienteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,9 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,6 +38,9 @@ public class ClienteService {
 
     public ClienteResponse addClient(ClienteRequest request){
         Cliente newCliente = new Cliente();
+        var clienteOptional = clienteRepository.findByEmail(request.getEmail());
+        if (clienteOptional.isPresent())
+            throw new CustomException("Email já cadastrado", HttpStatus.CONFLICT);
 
         String senhaCriptografada = passwordEncoder.encode(request.getSenha());
 
@@ -90,6 +93,11 @@ public class ClienteService {
         return clientes;
     }
 
-
+    public void foundClienteOrThrow(long idCliente){
+        var cliente = clienteRepository.findById(idCliente);
+        if (!cliente.isPresent()){
+            throw new CustomException("Cliente não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
