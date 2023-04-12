@@ -178,6 +178,10 @@ public class HomeService {
             var indice = new IndiceGrafico("Rendimentos", getPorcentagem(total, rendimento));
             response.add(indice);
         }
+        if (vendas > 0){
+            var indice = new IndiceGrafico("Vendas", getPorcentagem(total, vendas));
+            response.add(indice);
+        }
         if (freelance > 0){
             var indice = new IndiceGrafico("Freelance", getPorcentagem(total, freelance));
             response.add(indice);

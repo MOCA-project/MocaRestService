@@ -56,7 +56,7 @@ public class ReceitasService {
         var receita = repository.findById(idDespesa);
         if (receita.isPresent())
             repository.deleteById(idDespesa);
-
-        throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
+        else
+            throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
     }
 }

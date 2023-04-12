@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface ICartoesRepository extends JpaRepository<Cartao, Long> {
     List<Cartao> findByIdCliente(long idCliente);
+    boolean existsCartaoByIdCartaoAndIdCliente(Long idCartao, Long idCliente);
 
 }

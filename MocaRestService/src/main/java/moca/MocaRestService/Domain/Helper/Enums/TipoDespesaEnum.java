@@ -1,7 +1,7 @@
 package moca.MocaRestService.Domain.Helper.Enums;
 
 public enum TipoDespesaEnum {
-    Moradia(1, "Morádia"),
+    Moradia(1, "Moradia"),
     Alimentacao(2, "Alimentação"),
     Transporte(3, "Transporte"),
     Saude(4, "Saúde"),

@@ -1,9 +1,9 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
-import moca.MocaRestService.Domain.Mappers.ClienteMapper;
 import moca.MocaRestService.Domain.Mappers.DespesaMapper;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
+import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
@@ -22,6 +22,9 @@ public class DespesasService {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private ICartoesRepository cartoesRepository;
+
     public DespesaResponse add(DespesaRequesst request){
         var despesa = DespesaMapper.toDespesa(request);
 
@@ -37,7 +40,7 @@ public class DespesasService {
             expenseRepository.save(despesa.get());
         }
         else
-            throw new CustomException("Desesa não encontrada", HttpStatus.NOT_FOUND);
+            throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
 
         return DespesaMapper.toResponse(despesa.get());
     }
@@ -45,6 +48,10 @@ public class DespesasService {
     public List<DespesaResponse> despesaParcelada(DespesaParceladaRequest request){
         List<DespesaResponse> response = new ArrayList<>();
         List<Despesa> despesas = new ArrayList<>();
+        var exists = cartoesRepository.existsCartaoByIdCartaoAndIdCliente(request.getIdCartao(), request.getIdCliente());
+        if (!exists)
+            throw new CustomException("Este cliente não possui um cartão com esse ID", HttpStatus.NOT_FOUND);
+
         for (int i = 0; i < request.getParcelas(); i++) {
             var dataFutura = request.getData().plusMonths(i);
             Despesa despesa = new Despesa();
@@ -65,9 +72,10 @@ public class DespesasService {
 
     public void delete(Long idDespesa){
         var response = expenseRepository.findById(idDespesa);
-        if (response.isPresent()) {
+        if (response.isPresent())
             expenseRepository.deleteById(idDespesa);
-        }
-        throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
+        else
+            throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
+
     }
 }
