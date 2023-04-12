@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
-import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
+import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
 import moca.MocaRestService.Domain.Services.DespesasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class DespesaController {
             @ApiResponse(responseCode = "200")
     })
     @PostMapping
-    public  ResponseEntity<ExpenseResponse> add(@RequestBody DespesaRequesst request){
+    public  ResponseEntity<DespesaResponse> add(@RequestBody DespesaRequesst request){
         var result = service.add(request);
         return ResponseEntity.status(201).body(result);
     }
@@ -34,7 +34,7 @@ public class DespesaController {
             @ApiResponse(responseCode = "200")
     })
     @PostMapping("parcelada")
-    public ResponseEntity<List<ExpenseResponse>> add(@RequestBody DespesaParceladaRequest request){
+    public ResponseEntity<List<DespesaResponse>> add(@RequestBody DespesaParceladaRequest request){
         var result =  service.despesaParcelada(request);
         return ResponseEntity.status(201).body(result);
     }
@@ -43,7 +43,7 @@ public class DespesaController {
             @ApiResponse(responseCode = "200")
     })
     @PatchMapping("pagar/{idDespesa}")
-    public ResponseEntity<ExpenseResponse> pay(@PathVariable Long idDespesa){
+    public ResponseEntity<DespesaResponse> pay(@PathVariable Long idDespesa){
         var result =  service.pagar(idDespesa);
         return ResponseEntity.status(200).body(result);
     }

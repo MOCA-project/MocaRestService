@@ -3,6 +3,7 @@ package moca.MocaRestService.Domain.Services;
 import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Helper.ListaGenerica.ListaObj;
+import moca.MocaRestService.Domain.Mappers.ClienteMapper;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioLoginDTO;
@@ -37,44 +38,16 @@ public class ClienteService {
     private AuthenticationManager authenticationManager;
 
     public ClienteResponse addClient(ClienteRequest request){
-        Cliente newCliente = new Cliente();
         var clienteOptional = clienteRepository.findByEmail(request.getEmail());
         if (clienteOptional.isPresent())
             throw new CustomException("Email já cadastrado", HttpStatus.CONFLICT);
-
         String senhaCriptografada = passwordEncoder.encode(request.getSenha());
+        request.setSenha(senhaCriptografada);
 
-        newCliente.setEmail(request.getEmail());
-        newCliente.setSenha(senhaCriptografada);
-        newCliente.setIdPerfil(request.getIdTipoPerfil());
-        newCliente.setNome(request.getNome());
-
+        Cliente newCliente = ClienteMapper.toCliente(request);
         Cliente cliente =  clienteRepository.save(newCliente);
 
-        return new ClienteResponse(
-                cliente.getId(),
-                cliente.getNome(),
-                cliente.getEmail(),
-                cliente.getIdPerfil());
-    }
-
-    public UsuarioTokenDTO autenticar(UsuarioLoginDTO usuarioLoginDto) {
-
-        final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(
-                usuarioLoginDto.getEmail(), usuarioLoginDto.getSenha());
-
-        final Authentication authentication = this.authenticationManager.authenticate(credentials);
-
-        Cliente usuarioAutenticado = clienteRepository.findByEmail(usuarioLoginDto.getEmail())
-                        .orElseThrow(
-                                () -> new ResponseStatusException(404, "Email do usuário não cadastrado", null)
-                        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        final String token = gerenciadorTokenJwt.generateToken(authentication);
-
-        return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token);
+        return ClienteMapper.toResponse(cliente);
     }
 
     public List<Cliente> getAll() {
@@ -98,6 +71,25 @@ public class ClienteService {
         if (!cliente.isPresent()){
             throw new CustomException("Cliente não encontrado", HttpStatus.NOT_FOUND);
         }
+    }
+
+    public UsuarioTokenDTO autenticar(UsuarioLoginDTO usuarioLoginDto) {
+
+        final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(
+                usuarioLoginDto.getEmail(), usuarioLoginDto.getSenha());
+
+        final Authentication authentication = this.authenticationManager.authenticate(credentials);
+
+        Cliente usuarioAutenticado = clienteRepository.findByEmail(usuarioLoginDto.getEmail())
+                .orElseThrow(
+                        () -> new ResponseStatusException(404, "Email do usuário não cadastrado", null)
+                );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        final String token = gerenciadorTokenJwt.generateToken(authentication);
+
+        return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token);
     }
 
 }

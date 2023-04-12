@@ -24,9 +24,8 @@ public class NotificacoesController {
     @Autowired
     private IEmailSenderService emailService;
 
-    @Operation(summary = "Envia um SMS com o lembrete de cadastro de despesas", responses = {
-            @ApiResponse(responseCode = "200")
-    })
+    @Operation(summary = "Envia um SMS com o lembrete de cadastro de despesas",
+                responses = { @ApiResponse(responseCode = "200")})
     @PostMapping("sms")
     public ResponseEntity<String> sendSms(@RequestBody SmsSenderRequest request){
         var result =  twilioService.SendSms(request);
