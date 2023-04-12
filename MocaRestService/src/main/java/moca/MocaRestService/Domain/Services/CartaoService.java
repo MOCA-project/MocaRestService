@@ -17,6 +17,8 @@ public class CartaoService {
     private ICartoesRepository repository;
     @Autowired
     private IDespesasRepository despesasRepository;
+    @Autowired
+    private ClienteService clienteService;
 
     public CartaoResponse add(CartaoRequest request) {
         var cartao = new Cartao();
@@ -36,12 +38,12 @@ public class CartaoService {
     }
 
     public CartoesHomeResponse get(long idCliente, int mes, int ano) {
+        clienteService.foundClienteOrThrow(idCliente);
         var response = new CartoesHomeResponse();
-        var cartoes = repository.findAll();
+        var cartoes = repository.findByIdCliente(idCliente);
 
         for (Cartao cartao : cartoes){
-            var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano,
-                    cartao.getIdCartao());
+            var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano, cartao.getIdCartao());
             response.add(new CartoesHomeCartao(
                     cartao.getLimite(),
                     gasto,
@@ -49,7 +51,8 @@ public class CartaoService {
                     cartao.getVencimento(),
                     cartao.getIdCorCartao(),
                     cartao.getBandeira(),
-                    cartao.getApelido()
+                    cartao.getApelido(),
+                    cartao.getIdCartao()
             ));
         }
         return response;

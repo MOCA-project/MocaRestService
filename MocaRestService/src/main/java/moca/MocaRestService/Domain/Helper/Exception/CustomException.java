@@ -1,4 +1,4 @@
-package moca.MocaRestService.Domain.Helper;
+package moca.MocaRestService.Domain.Helper.Exception;
 
 import org.springframework.http.HttpStatus;
 

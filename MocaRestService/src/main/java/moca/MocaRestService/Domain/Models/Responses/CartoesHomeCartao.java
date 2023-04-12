@@ -8,12 +8,13 @@ public class CartoesHomeCartao {
     private long idCor;
     private String bandeira;
     private String apelido;
+    private Long idCartao;
 
     public CartoesHomeCartao() {
     }
 
     public CartoesHomeCartao(double limite, double utilizado, double porcentagemUtilizado,
-                             String vencimento, long idCor, String bandeira, String apelido) {
+                             String vencimento, long idCor, String bandeira, String apelido, Long idCartao) {
         this.limite = limite;
         this.utilizado = utilizado;
         this.porcentagemUtilizado = porcentagemUtilizado;
@@ -21,6 +22,7 @@ public class CartoesHomeCartao {
         this.idCor = idCor;
         this.bandeira = bandeira;
         this.apelido = apelido;
+        this.idCartao = idCartao;
     }
 
     public double getLimite() {
@@ -77,5 +79,13 @@ public class CartoesHomeCartao {
 
     public void setApelido(String apelido) {
         this.apelido = apelido;
+    }
+
+    public Long getIdCartao() {
+        return idCartao;
+    }
+
+    public void setIdCartao(Long idCartao) {
+        this.idCartao = idCartao;
     }
 }

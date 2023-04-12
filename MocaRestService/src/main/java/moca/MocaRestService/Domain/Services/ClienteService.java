@@ -1,8 +1,8 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
-import moca.MocaRestService.Domain.Helper.CustomException;
-import moca.MocaRestService.Domain.Helper.ListaObj;
+import moca.MocaRestService.Domain.Helper.Exception.CustomException;
+import moca.MocaRestService.Domain.Helper.ListaGenerica.ListaObj;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioLoginDTO;

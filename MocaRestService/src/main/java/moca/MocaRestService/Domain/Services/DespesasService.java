@@ -1,6 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Domain.Helper.CustomException;
+import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;

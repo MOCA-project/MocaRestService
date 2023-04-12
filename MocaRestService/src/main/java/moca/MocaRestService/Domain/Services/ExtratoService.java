@@ -1,6 +1,5 @@
 package moca.MocaRestService.Domain.Services;
 
-import moca.MocaRestService.Domain.Helper.CustomException;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
@@ -11,7 +10,6 @@ import moca.MocaRestService.Domain.Helper.Enums.TipoReceitaEnum;
 import moca.MocaRestService.Domain.Models.Responses.ExtratoResponse;
 import moca.MocaRestService.Domain.Models.Responses.ItemExtrato;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
