@@ -38,6 +38,14 @@ public class DespesaController {
         var result =  service.despesaParcelada(request);
         return ResponseEntity.status(201).body(result);
     }
+    @Operation(summary = "Cadastra uma despesa fixa na base de dados", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @PostMapping("fixa")
+    public ResponseEntity<DespesaResponse> addFixa(@RequestBody DespesaRequesst request){
+        var result =  service.despesaFixa(request);
+        return ResponseEntity.status(201).body(result);
+    }
 
     @Operation(summary = "Realiza o pagamento de uma despesa na base de dados", responses = {
             @ApiResponse(responseCode = "200")

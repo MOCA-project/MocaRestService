@@ -2,7 +2,10 @@ package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Mappers.DespesaMapper;
+import moca.MocaRestService.Domain.Mappers.ReceitaMapper;
+import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
+import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,5 +81,20 @@ public class DespesasService {
         else
             throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
 
+    }
+
+    public DespesaResponse despesaFixa(DespesaRequesst request) {
+        // Adiciona a mesma despesa para os próximos 12 meses
+        List<Despesa> despesas = new ArrayList<>();
+        LocalDate data = request.getData();
+        for (int i = 0; i < 12; i++) {
+            var despesa = DespesaMapper.toDespesa(request);
+            despesa.setData(data.plusMonths(i));
+            despesas.add(despesa);
+        }
+
+        List<Despesa> result = expenseRepository.saveAll(despesas);
+
+        return DespesaMapper.toResponse(result.stream().findAny().get());
     }
 }
