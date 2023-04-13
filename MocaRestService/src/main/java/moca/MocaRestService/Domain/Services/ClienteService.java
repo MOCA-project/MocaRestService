@@ -89,7 +89,8 @@ public class ClienteService {
 
         final String token = gerenciadorTokenJwt.generateToken(authentication);
 
-        return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token);
+        return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token,
+                usuarioAutenticado.getIdPerfil());
     }
 
 }
