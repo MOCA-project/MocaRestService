@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class TwilioService  implements ITwilioService {
     @Value("${twilio.account.sid}") private String ACCOUNT_SID;
     @Value("${twilio.auth.token}") private String AUTH_TOKEN;
+    @Value("${sms.lembrete}") private String lembreteMsg;
 
     @Override
     public String SendSms(SmsSenderRequest request) {
@@ -27,16 +28,12 @@ public class TwilioService  implements ITwilioService {
             Message message = Message.creator(
                             new com.twilio.type.PhoneNumber("+55" + request.getDestinatario()),
                             new com.twilio.type.PhoneNumber("+12677622210"),
-                            GetLembrete())
+                            lembreteMsg)
                     .create();
 
             return message.getStatus().toString();
         }catch (ApiException ex){
             throw new CustomException(ex.getMessage(), HttpStatus.valueOf(ex.getStatusCode()));
         }
-    }
-
-    public static String GetLembrete(){
-        return "Sabemos o quão difícil é organizar suas finanças, por isso queremos te ajudar! \\nNão se esqueça de cadastrar seus gastos em nossa plataforma. \\nRegistrar todas as despesas é fundamental para ter uma visão clara de suas finanças e poder tomar decisões mais inteligentes. \\nAproveite todas as funcionalidades da MOCA. \\n\\nConte conosco!";
     }
 }
