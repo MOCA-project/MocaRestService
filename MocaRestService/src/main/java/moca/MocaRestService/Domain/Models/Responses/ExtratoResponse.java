@@ -1,5 +1,7 @@
 package moca.MocaRestService.Domain.Models.Responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +22,7 @@ public class ExtratoResponse {
     public void add(ItemExtrato item){
         this.items.add(item);
     }
-
+    @JsonIgnore
     public List<String> getSituacao(){
         List<String> situacoes = new ArrayList<>();
         for (ItemExtrato itemExtrato : items){
@@ -28,6 +30,7 @@ public class ExtratoResponse {
         }
         return situacoes;
     }
+    @JsonIgnore
     public List<LocalDate> getData(){
         List<LocalDate> datas = new ArrayList<>();
         for (ItemExtrato itemExtrato : items){
@@ -35,6 +38,7 @@ public class ExtratoResponse {
         }
         return datas;
     }
+    @JsonIgnore
     public List<String> getDescricao(){
         List<String> descricoes = new ArrayList<>();
         for (ItemExtrato itemExtrato : items){
@@ -42,6 +46,7 @@ public class ExtratoResponse {
         }
         return descricoes;
     }
+    @JsonIgnore
     public List<String> getCategoria(){
         List<String> categorias = new ArrayList<>();
         for (ItemExtrato itemExtrato : items){
@@ -49,6 +54,7 @@ public class ExtratoResponse {
         }
         return categorias;
     }
+    @JsonIgnore
     public List<Double> getValor(){
         List<Double> valores = new ArrayList<>();
         for (ItemExtrato itemExtrato : items){
@@ -56,6 +62,5 @@ public class ExtratoResponse {
         }
         return valores;
     }
-
 
 }

@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import moca.MocaRestService.Domain.Models.Responses.ExtratoResponse;
-import moca.MocaRestService.Domain.Models.Responses.HomeResponse;
 import moca.MocaRestService.Domain.Services.ExtratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +33,16 @@ public class ExtratoController {
         var result =  service.get(idCliente, mes, ano);
         return ResponseEntity.status(200).body(result);
     }
+
+    @Operation(summary = "Retorna o extrato do cliente em formato CSV", responses = {
+            @ApiResponse(responseCode = "200")
+    })
     @GetMapping("arquivo/{idCliente}/{mes}/{ano}")
     public Void getCsv (@PathVariable long idCliente,
                         @PathVariable int mes,
                         @PathVariable int ano){
 
     List<ExtratoResponse> listaExtrato = Collections.singletonList(service.get(idCliente, mes, ano));
-
 
     return service.gravaArquivoCsv(listaExtrato,"extrato");
     }
