@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.List;
+
 @Tag(name = "Extrato", description = "Grupo de requisições de extrato")
 @RestController
 @RequestMapping("api/extrato/")
@@ -30,6 +33,16 @@ public class ExtratoController {
                                               @PathVariable int ano){
         var result =  service.get(idCliente, mes, ano);
         return ResponseEntity.status(200).body(result);
+    }
+    @GetMapping("arquivo/{idCliente}/{mes}/{ano}")
+    public Void getCsv (@PathVariable long idCliente,
+                        @PathVariable int mes,
+                        @PathVariable int ano){
+
+    List<ExtratoResponse> listaExtrato = Collections.singletonList(service.get(idCliente, mes, ano));
+
+
+    return service.gravaArquivoCsv(listaExtrato,"extrato");
     }
 
 }
