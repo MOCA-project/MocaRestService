@@ -1,9 +1,5 @@
 package moca.MocaRestService.Domain.Helper.Exception;
 
-import org.springframework.http.HttpStatus;
-
-import org.springframework.http.HttpStatus;
-
 import java.time.LocalDateTime;
 
 public class ErrorResponse {

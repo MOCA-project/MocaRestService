@@ -47,4 +47,16 @@ public class ReceitaController {
         service.removeReceita(idDespesa);
         return ResponseEntity.status(200).build();
     }
+
+    @Operation(summary = "Retorna os detalhes das receitas ", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404")
+    })
+    @GetMapping("{idCliente}/{mes}/{ano}")
+    public ResponseEntity<List<ReceitaResponse>> delete(@PathVariable long idCliente,
+                                       @PathVariable int mes,
+                                       @PathVariable int ano){
+        var result = service.get(idCliente, mes, ano);
+        return ResponseEntity.status(200).body(result);
+    }
 }

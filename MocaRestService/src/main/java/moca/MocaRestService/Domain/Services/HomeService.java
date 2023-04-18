@@ -4,7 +4,6 @@ import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
-import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
 import moca.MocaRestService.Domain.Models.Responses.*;

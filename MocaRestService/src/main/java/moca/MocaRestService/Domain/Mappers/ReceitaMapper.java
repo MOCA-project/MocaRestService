@@ -4,6 +4,9 @@ import moca.MocaRestService.Domain.Models.Requests.ReceitaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReceitaMapper {
     public static ReceitaResponse toResponse(Receita receita) {
         return new ReceitaResponse(
@@ -24,5 +27,21 @@ public class ReceitaMapper {
         receita.setIdCliente(request.getIdCliente());
         receita.setIdTipoReceita(request.getIdTipoReceita());
         return receita;
+    }
+
+    public static List<ReceitaResponse> toResponseList(List<Receita> receitas) {
+        List<ReceitaResponse> response = new ArrayList<>();
+        for (Receita reeceita :
+                receitas) {
+            response.add(new ReceitaResponse(
+                    reeceita.getIdReceita(),
+                    reeceita.getDescricao(),
+                    reeceita.getValor(),
+                    reeceita.getData(),
+                    reeceita.getIdCliente(),
+                    reeceita.getIdTipoReceita()
+            ));
+        }
+        return response;
     }
 }

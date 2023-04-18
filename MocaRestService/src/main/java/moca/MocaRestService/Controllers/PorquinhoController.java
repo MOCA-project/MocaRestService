@@ -1,12 +1,8 @@
 package moca.MocaRestService.Controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jdk.jfr.ContentType;
 import moca.MocaRestService.Infrastructure.Entities.Porquinho;
 import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;

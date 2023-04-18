@@ -86,4 +86,5 @@ public class DespesaResponse {
     public void setIdTipoDespesa(Long idTipoDespesa) {
         this.idTipoDespesa = idTipoDespesa;
     }
+
 }

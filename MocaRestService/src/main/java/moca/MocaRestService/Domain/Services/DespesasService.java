@@ -2,10 +2,7 @@ package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Mappers.DespesaMapper;
-import moca.MocaRestService.Domain.Mappers.ReceitaMapper;
-import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
-import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
@@ -96,5 +93,12 @@ public class DespesasService {
         List<Despesa> result = expenseRepository.saveAll(despesas);
 
         return DespesaMapper.toResponse(result.stream().findAny().get());
+    }
+
+    public List<DespesaResponse> get(long idCliente, int mes, int ano) {
+        var despesas = expenseRepository.getDespesasLista(idCliente, mes, ano);
+
+        return DespesaMapper.toResponseList(despesas);
+
     }
 }

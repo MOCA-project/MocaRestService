@@ -64,4 +64,15 @@ public class DespesaController {
         service.delete(idDespesa);
         return ResponseEntity.status(200).build();
     }
+
+    @Operation(summary = "Retorna as despesas do mês detalhadas", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @GetMapping("{idCliente}/{mes}/{ano}")
+    public ResponseEntity<List<DespesaResponse>> get(@PathVariable long idCliente,
+                                                     @PathVariable int mes,
+                                                     @PathVariable int ano){
+        var result = service.get(idCliente, mes, ano);
+        return ResponseEntity.status(200).body(result);
+    }
 }

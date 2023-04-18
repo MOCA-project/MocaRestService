@@ -12,8 +12,8 @@ public enum TipoDespesaEnum {
     Impostos(9, "Impostos"),
     Outros(10, "Outros");
 
-    private int id;
-    private String descricao;
+    private final int id;
+    private final String descricao;
 
     TipoDespesaEnum(int id, String descricao) {
         this.id = id;

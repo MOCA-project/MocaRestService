@@ -1,7 +1,9 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
+import moca.MocaRestService.Domain.Mappers.DespesaMapper;
 import moca.MocaRestService.Domain.Mappers.ReceitaMapper;
+import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
 import moca.MocaRestService.Domain.Models.Requests.ReceitaRequest;
@@ -12,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import org.springframework.http.HttpStatus;
 
@@ -57,6 +57,11 @@ public class ReceitasService {
         if (receita.isPresent())
             repository.deleteById(idDespesa);
         else
-            throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
+            throw new CustomException("Receita não encontrada", HttpStatus.NOT_FOUND);
+    }
+
+    public List<ReceitaResponse> get(long idCliente, int mes, int ano) {
+        var receitas = repository.getReceitasMesLista(idCliente, mes, ano);
+        return ReceitaMapper.toResponseList(receitas);
     }
 }

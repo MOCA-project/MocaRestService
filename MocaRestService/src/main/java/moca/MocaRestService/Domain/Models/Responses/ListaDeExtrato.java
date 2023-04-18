@@ -9,8 +9,8 @@ import moca.MocaRestService.Infrastructure.Entities.Receita;
 import java.util.List;
 
 public class ListaDeExtrato implements Iterador<ItemExtrato> {
-    private List<Receita> receitas;
-    private List<Despesa> despesas;
+    private final List<Receita> receitas;
+    private final List<Despesa> despesas;
     private int indexReceitas;
     private int indexDespesas;
 
