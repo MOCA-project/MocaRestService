@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UsuariosDetalhes implements UserDetails {
-    private String senha;
-    private String email;
-    private String nome;
+    private final String senha;
+    private final String email;
+    private final String nome;
 
     public String getNome(){
         return nome;

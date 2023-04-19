@@ -1,10 +1,10 @@
-package moca.MocaRestService.Domain.Helper;
+package moca.MocaRestService.Domain.Helper.ListaGenerica;
 
 import java.util.List;
 
 public class ListaObj <T> {
 
-    private T[] vetor;
+    private final T[] vetor;
     private int nroElem;
 
     public ListaObj(int tamanho) {

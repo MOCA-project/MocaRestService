@@ -2,7 +2,7 @@ package moca.MocaRestService.Domain.Models.Responses;
 
 import java.time.LocalDate;
 
-public class ExpenseResponse {
+public class DespesaResponse {
     private long idDespesa;
     private String descricao;
     private double valor;
@@ -12,7 +12,7 @@ public class ExpenseResponse {
     private Long idCliente;
     private Long idTipoDespesa;
 
-    public ExpenseResponse(long idDespesa, String descricao, double valor, LocalDate data, Boolean isPaid, Boolean isParcela, Long idCliente, Long idTipoDespesa) {
+    public DespesaResponse(long idDespesa, String descricao, double valor, LocalDate data, Boolean isPaid, Boolean isParcela, Long idCliente, Long idTipoDespesa) {
         this.idDespesa = idDespesa;
         this.descricao = descricao;
         this.valor = valor;
@@ -86,4 +86,5 @@ public class ExpenseResponse {
     public void setIdTipoDespesa(Long idTipoDespesa) {
         this.idTipoDespesa = idTipoDespesa;
     }
+
 }

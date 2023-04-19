@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
+import moca.MocaRestService.Domain.Mappers.CartaoMapper;
 import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
@@ -17,31 +18,24 @@ public class CartaoService {
     private ICartoesRepository repository;
     @Autowired
     private IDespesasRepository despesasRepository;
+    @Autowired
+    private ClienteService clienteService;
 
     public CartaoResponse add(CartaoRequest request) {
-        var cartao = new Cartao();
-        cartao.setIdCorCartao(request.getIdCor());
-        cartao.setBandeira(request.getBandeira());
-        cartao.setLimite(request.getLimite());
-        cartao.setIdTipo(request.getIdTipo());
-        cartao.setIdCliente(request.getIdCliente());
-        cartao.setApelido(request.getApelido());
-        cartao.setVencimento(request.getVencimento());
+        var cartao = CartaoMapper.toCartao(request);
 
         var result = repository.save(cartao);
 
-        return new CartaoResponse(result.getIdCartao(), result.getLimite(), result.getIdCliente(), result.getIdTipo(),
-                result.getIdCorCartao(), result.getBandeira(), result.getApelido());
-
+        return CartaoMapper.toCartaoResponse(result);
     }
 
     public CartoesHomeResponse get(long idCliente, int mes, int ano) {
+        clienteService.foundClienteOrThrow(idCliente);
         var response = new CartoesHomeResponse();
-        var cartoes = repository.findAll();
+        var cartoes = repository.findByIdCliente(idCliente);
 
         for (Cartao cartao : cartoes){
-            var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano,
-                    cartao.getIdCartao());
+            var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano, cartao.getIdCartao());
             response.add(new CartoesHomeCartao(
                     cartao.getLimite(),
                     gasto,
@@ -49,7 +43,8 @@ public class CartaoService {
                     cartao.getVencimento(),
                     cartao.getIdCorCartao(),
                     cartao.getBandeira(),
-                    cartao.getApelido()
+                    cartao.getApelido(),
+                    cartao.getIdCartao()
             ));
         }
         return response;

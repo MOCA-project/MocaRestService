@@ -4,15 +4,16 @@ package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Services;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Interfaces.IEmailSenderService;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetails;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Utils.HtmlHelper;
+import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Properties;
 
 @Service
@@ -30,9 +31,9 @@ public class EmailSenderService implements IEmailSenderService {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
             mailMessage.setFrom(username);
-            mailMessage.setTo(details.getRecipient());
+            mailMessage.setTo(details.getDestinatario());
             mailMessage.setText("<h1> Oi </h1>");
-            mailMessage.setSubject(details.getSubject());
+            mailMessage.setSubject(details.getAssunto());
 
             javaMailSender.send(mailMessage);
             return "Mail Sent Successfully...";
@@ -67,17 +68,13 @@ public class EmailSenderService implements IEmailSenderService {
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             messageHelper.setFrom(username);
-            messageHelper.setTo(details.getRecipient());
-            messageHelper.setSubject(details.getSubject());
-            messageHelper.setText(getHtml(), true);
+            messageHelper.setTo(details.getDestinatario());
+            messageHelper.setSubject(details.getAssunto());
+            messageHelper.setText(HtmlHelper.getEmailHtml(), true);
             mailSender.send(mimeMessage);
             return "Email enviado com sucesso";
         } catch (Exception ex) {
-            throw new Exception(ex);
+            throw new CustomException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    private String getHtml() throws IOException {
-        return HtmlHelper.getEmailHmtml();
     }
 }

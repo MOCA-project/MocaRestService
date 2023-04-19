@@ -24,6 +24,8 @@ public class HomeService {
     @Autowired
     private ICartoesRepository cartoesRepository;
     public HomeResponse getHome(long idCliente, int mes, int ano){
+        clienteService.foundClienteOrThrow(idCliente);
+
         var home = new HomeResponse();
         double despesasPagas = despesasRepository.getDespesasPagas(idCliente, mes, ano);
         double despesas = despesasRepository.getDespesas(idCliente, mes, ano);
@@ -173,6 +175,10 @@ public class HomeService {
         }
         if (rendimento > 0){
             var indice = new IndiceGrafico("Rendimentos", getPorcentagem(total, rendimento));
+            response.add(indice);
+        }
+        if (vendas > 0){
+            var indice = new IndiceGrafico("Vendas", getPorcentagem(total, vendas));
             response.add(indice);
         }
         if (freelance > 0){

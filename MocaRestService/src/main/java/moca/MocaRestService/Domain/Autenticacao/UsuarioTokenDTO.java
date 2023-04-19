@@ -5,12 +5,22 @@ public class UsuarioTokenDTO {
     private String nome;
     private String email;
     private String token;
+    private long idTipoPerfil;
 
-    public UsuarioTokenDTO(long id, String nome, String email, String token) {
+    public UsuarioTokenDTO(long id, String nome, String email, String token, long idTipoPerfil) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.token = token;
+        this.idTipoPerfil = idTipoPerfil;
+    }
+
+    public long getIdTipoPerfil() {
+        return idTipoPerfil;
+    }
+
+    public void setIdTipoPerfil(long idTipoPerfil) {
+        this.idTipoPerfil = idTipoPerfil;
     }
 
     public long getId() {

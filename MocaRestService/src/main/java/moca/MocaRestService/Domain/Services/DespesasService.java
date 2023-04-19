@@ -1,13 +1,18 @@
 package moca.MocaRestService.Domain.Services;
 
+import moca.MocaRestService.Domain.Helper.Exception.CustomException;
+import moca.MocaRestService.Domain.Mappers.DespesaMapper;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
+import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
-import moca.MocaRestService.Domain.Models.Responses.ExpenseResponse;
+import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,56 +23,40 @@ public class DespesasService {
     @Autowired
     private ClienteService clienteService;
 
-    public ExpenseResponse add(DespesaRequesst request){
-        Despesa despesa = new Despesa();
-        despesa.setData(request.getData());
-        despesa.setDescricao(request.getDescricao());
-        despesa.setIdTipoDespesa(request.getIdTipoDespesa());
-        despesa.setPaid(request.isPaid());
-        despesa.setParcela(request.isParcela());
-        despesa.setIdCliente(request.getIdCliente());
-        despesa.setValor(request.getValor());
-        despesa.setCartao(request.getIsCartao());
-        despesa.setIdCartao(request.getIdCartao());
+    @Autowired
+    private ICartoesRepository cartoesRepository;
 
-        var response = expenseRepository.save(despesa);
+    public DespesaResponse add(DespesaRequesst request){
+        var despesa = DespesaMapper.toDespesa(request);
 
-        return new ExpenseResponse(
-                response.getIdDespesa(),
-                response.getDescricao(),
-                response.getValor(),
-                response.getData(),
-                response.getPaid(),
-                response.getParcela(),
-                response.getIdCliente(),
-                response.getIdTipoDespesa());
+        var result = expenseRepository.save(despesa);
+
+        return DespesaMapper.toResponse(result);
     }
 
-    public ExpenseResponse pagar(Long idDespesa){
-        var response = expenseRepository.findById(idDespesa);
-        response.ifPresent((Despesa result) -> {
-            result.setPaid(true);
-            expenseRepository.save(result);
-        });
+    public DespesaResponse pagar(Long idDespesa){
+        var despesa = expenseRepository.findById(idDespesa);
+        if (despesa.isPresent()){
+            despesa.get().setPaid(true);
+            expenseRepository.save(despesa.get());
+        }
+        else
+            throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
 
-        return new ExpenseResponse(
-                response.get().getIdDespesa(),
-                response.get().getDescricao(),
-                response.get().getValor(),
-                response.get().getData(),
-                response.get().getPaid(),
-                response.get().getParcela(),
-                response.get().getIdCliente(),
-                response.get().getIdTipoDespesa());
-
+        return DespesaMapper.toResponse(despesa.get());
     }
 
-    public List<ExpenseResponse> despesaParcelada(DespesaParceladaRequest request){
-        List<ExpenseResponse> result = new ArrayList<>();
+    public List<DespesaResponse> despesaParcelada(DespesaParceladaRequest request){
+        List<DespesaResponse> response = new ArrayList<>();
+        List<Despesa> despesas = new ArrayList<>();
+        var exists = cartoesRepository.existsCartaoByIdCartaoAndIdCliente(request.getIdCartao(), request.getIdCliente());
+        if (!exists)
+            throw new CustomException("Este cliente não possui um cartão com esse ID", HttpStatus.NOT_FOUND);
+
         for (int i = 0; i < request.getParcelas(); i++) {
             var dataFutura = request.getData().plusMonths(i);
             Despesa despesa = new Despesa();
-            despesa.setData(dataFutura); // Incrementar mes
+            despesa.setData(dataFutura);
             despesa.setDescricao(request.getDescricao());
             despesa.setIdTipoDespesa(request.getIdTipoDespesa());
             despesa.setPaid(false);
@@ -75,26 +64,41 @@ public class DespesasService {
             despesa.setIdCliente(request.getIdCliente());
             despesa.setValor(request.getValor() / request.getParcelas());
             despesa.setCartao(true);
-            var response = expenseRepository.save(despesa);
-            result.add(new ExpenseResponse(
-                    response.getIdDespesa(),
-                    response.getDescricao(),
-                    response.getValor(),
-                    response.getData(),
-                    response.getPaid(),
-                    response.getParcela(),
-                    response.getIdCliente(),
-                    response.getIdTipoDespesa()));
+            despesa.setIdCartao(request.getIdCartao());
+            despesas.add(despesa);
         }
-        return result;
+        var result = expenseRepository.saveAll(despesas);
+        return DespesaMapper.toResponseList(result);
     }
 
-    public boolean delete(Long idDespesa){
+    public void delete(Long idDespesa){
         var response = expenseRepository.findById(idDespesa);
-        if (response.isPresent()) {
+        if (response.isPresent())
             expenseRepository.deleteById(idDespesa);
-            return true;
+        else
+            throw new CustomException("Despesa não encontrada", HttpStatus.NOT_FOUND);
+
+    }
+
+    public DespesaResponse despesaFixa(DespesaRequesst request) {
+        // Adiciona a mesma despesa para os próximos 12 meses
+        List<Despesa> despesas = new ArrayList<>();
+        LocalDate data = request.getData();
+        for (int i = 0; i < 12; i++) {
+            var despesa = DespesaMapper.toDespesa(request);
+            despesa.setData(data.plusMonths(i));
+            despesas.add(despesa);
         }
-        else return false;
+
+        List<Despesa> result = expenseRepository.saveAll(despesas);
+
+        return DespesaMapper.toResponse(result.stream().findAny().get());
+    }
+
+    public List<DespesaResponse> get(long idCliente, int mes, int ano) {
+        var despesas = expenseRepository.getDespesasLista(idCliente, mes, ano);
+
+        return DespesaMapper.toResponseList(despesas);
+
     }
 }

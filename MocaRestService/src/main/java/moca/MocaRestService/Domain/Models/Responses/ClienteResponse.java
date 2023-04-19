@@ -1,5 +1,7 @@
 package moca.MocaRestService.Domain.Models.Responses;
 
+import moca.MocaRestService.Infrastructure.Entities.Cliente;
+
 //retornar
 public class ClienteResponse {
     private long id;
@@ -44,5 +46,11 @@ public class ClienteResponse {
 
     public void setIdTipoPerfil(long idTipoPerfil) {
         this.idTipoPerfil = idTipoPerfil;
+    }
+    public void addCliente(Cliente cliente){
+        this.id = cliente.getId();
+        this.email = cliente.getEmail();
+        this.idTipoPerfil = cliente.getIdPerfil();
+        this.nome = cliente.getNome();
     }
 }

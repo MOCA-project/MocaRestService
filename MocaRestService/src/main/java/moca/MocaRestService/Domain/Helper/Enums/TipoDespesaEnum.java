@@ -1,7 +1,7 @@
 package moca.MocaRestService.Domain.Helper.Enums;
 
 public enum TipoDespesaEnum {
-    Moradia(1, "Morádia"),
+    Moradia(1, "Moradia"),
     Alimentacao(2, "Alimentação"),
     Transporte(3, "Transporte"),
     Saude(4, "Saúde"),
@@ -12,8 +12,8 @@ public enum TipoDespesaEnum {
     Impostos(9, "Impostos"),
     Outros(10, "Outros");
 
-    private int id;
-    private String descricao;
+    private final int id;
+    private final String descricao;
 
     TipoDespesaEnum(int id, String descricao) {
         this.id = id;

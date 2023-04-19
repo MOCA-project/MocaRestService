@@ -9,6 +9,7 @@ public class DespesaParceladaRequest {
     private Long idCliente;
     private Long idTipoDespesa;
     private int parcelas;
+    private Long idCartao;
 
     public String getDescricao() {
         return descricao;
@@ -56,5 +57,13 @@ public class DespesaParceladaRequest {
 
     public void setParcelas(int parcelas) {
         this.parcelas = parcelas;
+    }
+
+    public Long getIdCartao() {
+        return idCartao;
+    }
+
+    public void setIdCartao(Long idCartao) {
+        this.idCartao = idCartao;
     }
 }

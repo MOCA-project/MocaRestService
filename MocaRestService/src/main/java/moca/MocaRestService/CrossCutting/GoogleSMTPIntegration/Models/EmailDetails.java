@@ -1,22 +1,22 @@
 package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models;
 
 public class EmailDetails {
-    public String subject;
-    public String recipient;
+    public String assunto;
+    public String destinatario;
 
-    public String getSubject() {
-        return subject;
+    public String getAssunto() {
+        return assunto;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setAssunto(String assunto) {
+        this.assunto = assunto;
     }
 
-    public String getRecipient() {
-        return recipient;
+    public String getDestinatario() {
+        return destinatario;
     }
 
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
+    public void setDestinatario(String destinatario) {
+        this.destinatario = destinatario;
     }
 }
