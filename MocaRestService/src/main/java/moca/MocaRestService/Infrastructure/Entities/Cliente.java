@@ -1,6 +1,7 @@
 package moca.MocaRestService.Infrastructure.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,13 @@ public class Cliente {
     @Basic
     @Column(name = "id_perfil")
     private Long idPerfil;
+    @Basic
+    @Column(name = "ultimo_acesso")
+    private LocalDate ultimoAcesso;
+
+    @Basic
+    @Column(name = "telefone")
+    private String telefone;
 
     public long getId() {
         return id;
@@ -61,6 +69,22 @@ public class Cliente {
 
     public void setIdPerfil(Long idPerfil) {
         this.idPerfil = idPerfil;
+    }
+
+    public LocalDate getUltimoAcesso() {
+        return ultimoAcesso;
+    }
+
+    public void setUltimoAcesso(LocalDate ultimoAcesso) {
+        this.ultimoAcesso = ultimoAcesso;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override

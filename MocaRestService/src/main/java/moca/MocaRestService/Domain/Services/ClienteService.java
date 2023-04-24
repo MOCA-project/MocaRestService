@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
+import com.twilio.type.Client;
 import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Helper.ListaGenerica.ListaObj;
@@ -19,6 +20,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -73,6 +76,14 @@ public class ClienteService {
         }
     }
 
+    public Cliente getClienteOrThrow(long idCliente){
+        var cliente = clienteRepository.findById(idCliente);
+        if (!cliente.isPresent()){
+            throw new CustomException("Cliente não encontrado", HttpStatus.NOT_FOUND);
+        }
+        return cliente.get();
+    }
+
     public UsuarioTokenDTO autenticar(UsuarioLoginDTO usuarioLoginDto) {
 
         final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(
@@ -88,7 +99,7 @@ public class ClienteService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         final String token = gerenciadorTokenJwt.generateToken(authentication);
-
+        usuarioAutenticado.setUltimoAcesso(LocalDate.now());
         return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token,
                 usuarioAutenticado.getIdPerfil());
     }

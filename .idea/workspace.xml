@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b174329-e52d-4c85-add2-d5e21dfc5cc8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Controllers/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Domain/Services/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MocaRestService/src/main/java/moca/MocaRestService/Domain/Services/ClienteService.java" afterDir="false" />
-    </list>
+    <list default="true" id="9b174329-e52d-4c85-add2-d5e21dfc5cc8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/MocaRestService",
+    "last_opened_file_path": "C:/MocaRestService/MocaRestService",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -57,6 +54,7 @@
       <workItem from="1676928246319" duration="7000" />
       <workItem from="1679669156639" duration="400000" />
       <workItem from="1679697249585" duration="599000" />
+      <workItem from="1681856538691" duration="7000" />
     </task>
     <servers />
   </component>

@@ -3,6 +3,7 @@ package moca.MocaRestService.Controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import moca.MocaRestService.Domain.Jobs.NotificacaoTask;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
 import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
@@ -20,6 +21,8 @@ public class DespesaController {
 
     @Autowired
     private DespesasService service;
+    @Autowired
+    private NotificacaoTask notificacaoTask;
 
     @Operation(summary = "Cadastra uma despesa comum na base de dados", responses = {
             @ApiResponse(responseCode = "200")
@@ -27,6 +30,7 @@ public class DespesaController {
     @PostMapping
     public  ResponseEntity<DespesaResponse> add(@RequestBody DespesaRequesst request){
         var result = service.add(request);
+        notificacaoTask.revisarLimiteUtilizado(request.getIdCliente());
         return ResponseEntity.status(201).body(result);
     }
 
@@ -36,6 +40,7 @@ public class DespesaController {
     @PostMapping("parcelada")
     public ResponseEntity<List<DespesaResponse>> add(@RequestBody DespesaParceladaRequest request){
         var result =  service.despesaParcelada(request);
+        notificacaoTask.revisarLimiteUtilizado(request.getIdCliente());
         return ResponseEntity.status(201).body(result);
     }
     @Operation(summary = "Cadastra uma despesa fixa na base de dados", responses = {

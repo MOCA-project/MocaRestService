@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
+import moca.MocaRestService.CrossCutting.TwilioIntegration.Services.TwilioService;
 import moca.MocaRestService.Domain.Mappers.CartaoMapper;
 import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
@@ -20,6 +21,8 @@ public class CartaoService {
     private IDespesasRepository despesasRepository;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private TwilioService twilioService;
 
     public CartaoResponse add(CartaoRequest request) {
         var cartao = CartaoMapper.toCartao(request);

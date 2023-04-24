@@ -15,6 +15,7 @@ public class TwilioService  implements ITwilioService {
     @Value("${twilio.account.sid}") private String ACCOUNT_SID;
     @Value("${twilio.auth.token}") private String AUTH_TOKEN;
     @Value("${sms.lembrete}") private String lembreteMsg;
+    @Value("${sms.limite}") private String limiteMsg;
 
     @Override
     public String SendSms(SmsSenderRequest request) {
@@ -32,6 +33,25 @@ public class TwilioService  implements ITwilioService {
                     .create();
 
             return message.getStatus().toString();
+        }catch (ApiException ex){
+            throw new CustomException(ex.getMessage(), HttpStatus.valueOf(ex.getStatusCode()));
+        }
+    }
+
+    public void enviarAvisoLimite(String destinatario) {
+        try {
+            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        }catch (ApiException ex){
+            throw new CustomException(ex.getMessage(), HttpStatus.valueOf(ex.getStatusCode()));
+        }
+
+        try {
+            Message message = Message.creator(
+                            new com.twilio.type.PhoneNumber("+55" + destinatario),
+                            new com.twilio.type.PhoneNumber("+12677622210"),
+                            limiteMsg)
+                    .create();
+
         }catch (ApiException ex){
             throw new CustomException(ex.getMessage(), HttpStatus.valueOf(ex.getStatusCode()));
         }

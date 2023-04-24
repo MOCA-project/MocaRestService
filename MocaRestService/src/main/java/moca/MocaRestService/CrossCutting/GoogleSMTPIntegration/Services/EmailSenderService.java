@@ -2,79 +2,78 @@ package moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Services;
 
 
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Interfaces.IEmailSenderService;
-import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetails;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Utils.HtmlHelper;
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
+import moca.MocaRestService.Domain.Services.ClienteService;
+import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.Properties;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class EmailSenderService implements IEmailSenderService {
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    ClienteService clienteService;
     @Value("${spring.mail.username}") private String username;
     @Value("${spring.mail.host}") private String host;
     @Value("${spring.mail.password}") private String password;
     @Value("${spring.mail.port}") private int port;
 
-    public String sendSimpleMail(EmailDetails details)
-    {
-        try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-            mailMessage.setFrom(username);
-            mailMessage.setTo(details.getDestinatario());
-            mailMessage.setText("<h1> Oi </h1>");
-            mailMessage.setSubject(details.getAssunto());
-
-            javaMailSender.send(mailMessage);
-            return "Mail Sent Successfully...";
+    @Async
+    public void sendMail() throws Exception {
+        var clientes = clienteService.getAll();
+        List<String> emails = new ArrayList<>();
+        for(Cliente cliente : clientes){
+            if (LocalDate.now().minusDays(3).isAfter(cliente.getUltimoAcesso())){
+                emails.add(cliente.getEmail());
+            }
         }
 
-        catch (Exception e) {
-            return "Error while Sending Mail";
-        }
-    }
+        // Agendar o envio dos emails com intervalo de 5 segundos entre cada envio
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        Iterator<String> iterator = emails.iterator();
 
-    public String sendMail(EmailDetails details) throws Exception {
+        Runnable sendEmailTask = new Runnable() {
+            @Override
+            public void run() {
+                if (iterator.hasNext()) {
+                    String email = iterator.next();
+                    try {
+                        // Cria um novo MimeMessage para cada email
+                        javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+                        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+                        messageHelper.setFrom(username);
+                        messageHelper.setTo(email);
+                        messageHelper.setSubject("Lembrete - MOCA");
+                        messageHelper.setText(HtmlHelper.getEmailHtml(), true);
+                        javaMailSender.send(mimeMessage);
+                        System.out.println("Enviou");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        throw new CustomException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+                    }
+                } else {
+                    executorService.shutdown();
+                }
+            }
+        };
 
-        javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        executorService.scheduleAtFixedRate(sendEmailTask, 0, 5, TimeUnit.SECONDS);
 
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(host);
-        mailSender.setPort(port);
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
-
-        Properties properties = mailSender.getJavaMailProperties();
-        properties.put("mail.smtp.starttls.enable", Boolean.TRUE);
-        properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.smtp.auth", Boolean.TRUE);
-        properties.put("mail.smtp.starttls.required", Boolean.TRUE);
-        properties.put("mail.smtp.ssl.enable", Boolean.FALSE);
-        properties.put("mail.test-connection", Boolean.TRUE);
-        properties.put("mail.debug", Boolean.TRUE);
-
-        mailSender.setJavaMailProperties(properties);
-
-        try {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-            messageHelper.setFrom(username);
-            messageHelper.setTo(details.getDestinatario());
-            messageHelper.setSubject(details.getAssunto());
-            messageHelper.setText(HtmlHelper.getEmailHtml(), true);
-            mailSender.send(mimeMessage);
-            return "Email enviado com sucesso";
-        } catch (Exception ex) {
-            throw new CustomException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        // Aguarda todas as threads terminarem de enviar os emails
+        executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
     }
 }

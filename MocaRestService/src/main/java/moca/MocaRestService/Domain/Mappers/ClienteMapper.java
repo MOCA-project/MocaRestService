@@ -11,6 +11,7 @@ public class ClienteMapper {
         cliente.setNome(request.getNome());
         cliente.setSenha(request.getSenha());
         cliente.setIdPerfil(request.getIdTipoPerfil());
+        cliente.setTelefone(request.getTelefone());
         return cliente;
     }
 

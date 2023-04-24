@@ -1,5 +1,9 @@
 package moca.MocaRestService.Domain.Models.Requests;
 
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.validation.constraints.Size;
+
 public class CartaoRequest {
     private double limite;
     private Long idCliente;
