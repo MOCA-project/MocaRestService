@@ -28,7 +28,7 @@ public class NotificacaoTask {
     public void revisarLimiteUtilizado(Long idCliente) {
         boolean enviar = false;
         var cliente = clienteService.getClienteOrThrow(idCliente);
-        var numero = cliente.getEmail();
+        var numero = cliente.getTelefone();
         var cartoes = cartoesRepository.findByIdCliente(idCliente);
 
         for (Cartao cartao : cartoes){
@@ -41,7 +41,6 @@ public class NotificacaoTask {
         }
 
         if (enviar){
-            numero = "11959817061";
             twilioService.enviarAvisoLimite(numero);
         }
 

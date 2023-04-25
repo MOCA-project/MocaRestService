@@ -100,6 +100,7 @@ public class ClienteService {
 
         final String token = gerenciadorTokenJwt.generateToken(authentication);
         usuarioAutenticado.setUltimoAcesso(LocalDate.now());
+        clienteRepository.save(usuarioAutenticado);
         return new UsuarioTokenDTO(usuarioAutenticado.getId(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), token,
                 usuarioAutenticado.getIdPerfil());
     }
