@@ -32,8 +32,8 @@ public class NotificacaoTask {
         var cartoes = cartoesRepository.findByIdCliente(idCliente);
 
         for (Cartao cartao : cartoes){
-            var gasto = despesasRepository.getGastosCartoes(
-                    idCliente, LocalDate.now().getMonthValue(), LocalDate.now().getYear(), cartao.getIdCartao());
+            var gasto = despesasRepository.getGastosCartoesTotal(
+                    idCliente, cartao.getIdCartao());
 
             if (getPorcentagem(cartao.getLimite(), gasto) > 75){
                 enviar = true;

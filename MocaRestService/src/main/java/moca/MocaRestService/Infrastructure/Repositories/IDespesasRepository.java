@@ -35,4 +35,9 @@ public interface IDespesasRepository extends JpaRepository<Despesa, Long> {
             "and d.isCartao = true " +
             "and d.idCartao = ?4")
     double getGastosCartoes(long idCliente, int mes, int ano, long idCartao);
+
+    @Query(value = "select coalesce( sum(d.valor), 0) from Despesa d where d.idCliente  = ?1 " +
+            "and d.isCartao = true " +
+            "and d.idCartao = ?2")
+    double getGastosCartoesTotal(long idCliente, long idCartao);
 }

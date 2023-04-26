@@ -38,7 +38,7 @@ public class CartaoService {
         var cartoes = repository.findByIdCliente(idCliente);
 
         for (Cartao cartao : cartoes){
-            var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano, cartao.getIdCartao());
+            var gasto = despesasRepository.getGastosCartoesTotal(idCliente, cartao.getIdCartao());
             response.add(new CartoesHomeCartao(
                     cartao.getLimite(),
                     gasto,
