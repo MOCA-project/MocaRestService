@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Mappers;
 
+import moca.MocaRestService.Domain.Helper.Enums.TipoDespesaEnum;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
@@ -31,7 +32,7 @@ public class DespesaMapper {
                 response.getPaid(),
                 response.getParcela(),
                 response.getIdCliente(),
-                response.getIdTipoDespesa());
+                TipoDespesaEnum.getByID(response.getIdTipoDespesa().intValue()));
     }
 
     public static List<DespesaResponse> toResponseList(List<Despesa> result) {
@@ -45,7 +46,7 @@ public class DespesaMapper {
                     despesa.getPaid(),
                     despesa.getParcela(),
                     despesa.getIdCliente(),
-                    despesa.getIdTipoDespesa()
+                    TipoDespesaEnum.getByID(despesa.getIdTipoDespesa().intValue())
             );
             responseList.add(response);
         }

@@ -10,9 +10,9 @@ public class DespesaResponse {
     private Boolean isPaid;
     private Boolean isParcela;
     private Long idCliente;
-    private Long idTipoDespesa;
+    private String tipoDespesa;
 
-    public DespesaResponse(long idDespesa, String descricao, double valor, LocalDate data, Boolean isPaid, Boolean isParcela, Long idCliente, Long idTipoDespesa) {
+    public DespesaResponse(long idDespesa, String descricao, double valor, LocalDate data, Boolean isPaid, Boolean isParcela, Long idCliente, String idTipoDespesa) {
         this.idDespesa = idDespesa;
         this.descricao = descricao;
         this.valor = valor;
@@ -20,7 +20,7 @@ public class DespesaResponse {
         this.isPaid = isPaid;
         this.isParcela = isParcela;
         this.idCliente = idCliente;
-        this.idTipoDespesa = idTipoDespesa;
+        this.tipoDespesa = idTipoDespesa;
     }
 
     public long getIdDespesa() {
@@ -79,12 +79,12 @@ public class DespesaResponse {
         this.idCliente = idCliente;
     }
 
-    public Long getIdTipoDespesa() {
-        return idTipoDespesa;
+    public String getIdTipoDespesa() {
+        return tipoDespesa;
     }
 
-    public void setIdTipoDespesa(Long idTipoDespesa) {
-        this.idTipoDespesa = idTipoDespesa;
+    public void setIdTipoDespesa(String idTipoDespesa) {
+        this.tipoDespesa = idTipoDespesa;
     }
 
 }

@@ -8,15 +8,15 @@ public class ReceitaResponse {
     private double valor;
     private LocalDate data;
     private long idCliente;
-    private long idTipoReceita;
+    private String tipoReceita;
 
-    public ReceitaResponse(long idReceita, String descricao, double valor, LocalDate data, long idCliente, long idTipoReceita) {
+    public ReceitaResponse(long idReceita, String descricao, double valor, LocalDate data, long idCliente, String idTipoReceita) {
         this.idReceita = idReceita;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
         this.idCliente = idCliente;
-        this.idTipoReceita = idTipoReceita;
+        this.tipoReceita = idTipoReceita;
     }
 
     public long getIdReceita() {
@@ -59,11 +59,11 @@ public class ReceitaResponse {
         this.idCliente = idCliente;
     }
 
-    public long getIdTipoReceita() {
-        return idTipoReceita;
+    public String getIdTipoReceita() {
+        return tipoReceita;
     }
 
-    public void setIdTipoReceita(long idTipoReceita) {
-        this.idTipoReceita = idTipoReceita;
+    public void setIdTipoReceita(String idTipoReceita) {
+        this.tipoReceita = idTipoReceita;
     }
 }

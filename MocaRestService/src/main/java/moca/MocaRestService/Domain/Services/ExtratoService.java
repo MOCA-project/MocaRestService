@@ -28,6 +28,7 @@ public class ExtratoService {
     public ExtratoResponse get(long idCliente, int mes, int ano) {
         clienteService.foundClienteOrThrow(idCliente);
         var response = new ExtratoResponse();
+
         var receitas = receitasRepository.getReceitasMesLista(idCliente, mes, ano);
         var despesas = despesasRepository.getDespesasLista(idCliente, mes, ano);
 
@@ -35,9 +36,9 @@ public class ExtratoService {
         while (iterador.hasNext()) {
             response.add(iterador.next());
         }
-
         return response;
     }
+
     public Void gravaArquivoCsv (List<ExtratoResponse> listaExtrato, String nomeArq){
         FileWriter arq = null;
         Formatter saida = null;
