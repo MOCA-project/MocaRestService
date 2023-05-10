@@ -33,11 +33,11 @@ public class CartaoService {
     }
 
     public CartoesHomeResponse get(long idCliente, int mes, int ano) {
-        clienteService.foundClienteOrThrow(idCliente);
+
         var response = new CartoesHomeResponse();
         var cartoes = repository.findByIdCliente(idCliente);
-
-        for (Cartao cartao : cartoes){
+        long startTime = System.currentTimeMillis();
+        cartoes.parallelStream().forEach(cartao -> {
             var gasto = despesasRepository.getGastosCartoesTotal(idCliente, cartao.getIdCartao());
             response.add(new CartoesHomeCartao(
                     cartao.getLimite(),
@@ -49,7 +49,9 @@ public class CartaoService {
                     cartao.getApelido(),
                     cartao.getIdCartao()
             ));
-        }
+        });
+        long endTime = System.currentTimeMillis();
+        System.out.println("Tempo de execução do método get(): " + (endTime - startTime) + " ms");
         return response;
     }
 
