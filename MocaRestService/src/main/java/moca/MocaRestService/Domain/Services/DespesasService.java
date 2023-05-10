@@ -59,7 +59,7 @@ public class DespesasService {
             despesa.setData(dataFutura);
             despesa.setDescricao(request.getDescricao());
             despesa.setIdTipoDespesa(request.getIdTipoDespesa());
-            despesa.setPaid(false);
+            despesa.setPaid(true);
             despesa.setParcela(true);
             despesa.setIdCliente(request.getIdCliente());
             despesa.setValor(request.getValor() / request.getParcelas());

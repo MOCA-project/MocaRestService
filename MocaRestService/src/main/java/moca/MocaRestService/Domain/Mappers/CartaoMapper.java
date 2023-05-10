@@ -32,6 +32,7 @@ public class CartaoMapper {
         cartao.setIdCorCartao(cartaoResponse.getIdCor());
         cartao.setBandeira(cartaoResponse.getBandeira());
         cartao.setApelido(cartaoResponse.getApelido());
+        cartao.setVencimento(cartaoResponse.getVencimento());
         return cartao;
     }
 
