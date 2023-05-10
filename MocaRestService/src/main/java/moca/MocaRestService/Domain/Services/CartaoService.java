@@ -12,10 +12,6 @@ import moca.MocaRestService.Domain.Models.Responses.CartoesHomeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
-
 @Service
 public class CartaoService {
 
@@ -41,25 +37,19 @@ public class CartaoService {
         var response = new CartoesHomeResponse();
         var cartoes = repository.findByIdCliente(idCliente);
 
-        List<CompletableFuture<CartoesHomeCartao>> futures = cartoes.parallelStream()
-                .map(cartao -> CompletableFuture.supplyAsync(() -> {
-                    var gasto = despesasRepository.getGastosCartoesTotal(idCliente, cartao.getIdCartao());
-                    return new CartoesHomeCartao(
-                            cartao.getLimite(),
-                            gasto,
-                            getPorcentagem(cartao.getLimite(), gasto),
-                            cartao.getVencimento(),
-                            cartao.getIdCorCartao(),
-                            cartao.getBandeira(),
-                            cartao.getApelido(),
-                            cartao.getIdCartao()
-                    );
-                }))
-                .collect(Collectors.toList());
-
-        List<CartoesHomeCartao> cartoesHome = futures.stream()
-                .map(CompletableFuture::join)
-                .collect(Collectors.toList());
+        cartoes.stream().forEach(cartao -> {
+            var gasto = despesasRepository.getGastosCartoesTotal(idCliente, cartao.getIdCartao());
+            response.add(new CartoesHomeCartao(
+                    cartao.getLimite(),
+                    gasto,
+                    getPorcentagem(cartao.getLimite(), gasto),
+                    cartao.getVencimento(),
+                    cartao.getIdCorCartao(),
+                    cartao.getBandeira(),
+                    cartao.getApelido(),
+                    cartao.getIdCartao()
+            ));
+        });
 
         return response;
     }
