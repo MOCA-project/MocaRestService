@@ -3,6 +3,7 @@ package moca.MocaRestService.Domain.Services;
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Mappers.DespesaMapper;
 import moca.MocaRestService.Domain.Mappers.ReceitaMapper;
+import moca.MocaRestService.Domain.Models.Requests.PatchReceitaRequest;
 import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
@@ -63,5 +64,24 @@ public class ReceitasService {
     public List<ReceitaResponse> get(long idCliente, int mes, int ano) {
         var receitas = repository.getReceitasMesLista(idCliente, mes, ano);
         return ReceitaMapper.toResponseList(receitas);
+    }
+
+    public ReceitaResponse edit(long idReceita, PatchReceitaRequest request) {
+        var receitaOpt = repository.findById(idReceita);
+        var receita = receitaOpt.get();
+
+        if (request.getDescricao() != null)
+            receita.setDescricao(request.getDescricao());
+
+        if (request.getData() != null)
+            receita.setData(request.getData());
+
+        if (request.getValor() != null)
+            receita.setValor(request.getValor());
+
+        var receitaEditada = repository.save(receita);
+
+        return ReceitaMapper.toResponse(receitaEditada);
+
     }
 }

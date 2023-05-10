@@ -2,6 +2,7 @@ package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Mappers.DespesaMapper;
+import moca.MocaRestService.Domain.Models.Requests.PatchDespesaRequest;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
@@ -100,5 +101,23 @@ public class DespesasService {
 
         return DespesaMapper.toResponseList(despesas);
 
+    }
+
+    public DespesaResponse edit(long idDespesa, PatchDespesaRequest request) {
+        var despesaOpt = expenseRepository.findById(idDespesa);
+        var despesa = despesaOpt.get();
+
+        if (request.getDescricao() != null)
+            despesa.setDescricao(request.getDescricao());
+
+        if (request.getData() != null)
+            despesa.setData(request.getData());
+
+        if (request.getValor() != null)
+            despesa.setValor(request.getValor());
+
+        var despesaeditada = expenseRepository.save(despesa);
+
+        return DespesaMapper.toResponse(despesaeditada);
     }
 }

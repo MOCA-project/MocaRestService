@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import moca.MocaRestService.Domain.Jobs.NotificacaoTask;
 import moca.MocaRestService.Domain.Models.Requests.DespesaRequesst;
 import moca.MocaRestService.Domain.Models.Requests.DespesaParceladaRequest;
+import moca.MocaRestService.Domain.Models.Requests.PatchDespesaRequest;
 import moca.MocaRestService.Domain.Models.Responses.DespesaResponse;
 import moca.MocaRestService.Domain.Services.DespesasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,4 +81,14 @@ public class DespesaController {
         var result = service.get(idCliente, mes, ano);
         return ResponseEntity.status(200).body(result);
     }
+    @Operation(summary = "Editar a despesa", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @PatchMapping("{idDespesa}")
+    public ResponseEntity<DespesaResponse> edit(@PathVariable long idDespesa,
+                                                @RequestBody PatchDespesaRequest request){
+        var result = service.edit(idDespesa, request);
+        return ResponseEntity.status(200).body(result);
+    }
+
 }
