@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,8 @@ public class ExtratoController {
     ExtratoService service;
 
     Path diretorioBase = Path.of(System.getProperty("user.dir"));
+    Path txtBase = Paths.get("").toAbsolutePath();
+    Path diretorioBase2 = Paths.get(txtBase + "/extrato.txt");
 
 
     @Operation(summary = "Retorna o extrato do cliente referente a data solicitada", responses = {
@@ -69,5 +72,33 @@ public class ExtratoController {
             throw new ResponseStatusException(422, "Não foi possível converter para byte[]", null);
         }
     }
+    @Operation(
+            summary = "Downdload do extrato em txt", responses = {
+            @ApiResponse(responseCode = "200", description = "Extrato bancário baixado com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Não foi possível baixar o extrato bancário"),
+    })
+    @GetMapping("arquivoTxt/{idCliente}/{mes}/{ano}")
+    public ResponseEntity<byte[]> downloadTxt(@PathVariable long idCliente,
+                                           @PathVariable int mes,
+                                           @PathVariable int ano) {
+        List<ExtratoResponse> listaExtrato = Collections.singletonList(service.get(idCliente, mes, ano));
+        service.gravaArquivoTxt(listaExtrato, "extrato.txt");
 
+        File file = this.diretorioBase2.toFile();
+
+        try {
+            InputStream fileInputStream = new FileInputStream(file);
+
+            return ResponseEntity.status(200)
+                    .header("Content-Disposition",
+                            "attachment; filename=" + "extrato.txt")
+                    .body(fileInputStream.readAllBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(422, "Diretório não encontrado", null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(422, "Não foi possível converter para byte[]", null);
+        }
+    }
 }
