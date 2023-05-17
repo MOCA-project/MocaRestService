@@ -1,6 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
+import moca.MocaRestService.Domain.Helper.GenericTypes.PilhaObj;
 import moca.MocaRestService.Domain.Mappers.DespesaMapper;
 import moca.MocaRestService.Domain.Models.Requests.PatchDespesaRequest;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
@@ -82,18 +83,25 @@ public class DespesasService {
     }
 
     public DespesaResponse despesaFixa(DespesaRequesst request) {
-        // Adiciona a mesma despesa para os próximos 12 meses
-        List<Despesa> despesas = new ArrayList<>();
+        PilhaObj<Despesa> pilhaDespesas = new PilhaObj<>(12);
         LocalDate data = request.getData();
+
         for (int i = 0; i < 12; i++) {
-            var despesa = DespesaMapper.toDespesa(request);
+            Despesa despesa = DespesaMapper.toDespesa(request);
             despesa.setData(data.plusMonths(i));
+            pilhaDespesas.push(despesa);
+        }
+
+        List<Despesa> despesas = new ArrayList<>();
+        while (!pilhaDespesas.isEmpty()) {
+            Despesa despesa = pilhaDespesas.pop();
             despesas.add(despesa);
         }
 
-        List<Despesa> result = expenseRepository.saveAll(despesas);
+        List<Despesa> despesasSalvas = expenseRepository.saveAll(despesas);
+        Despesa despesaSalva = despesasSalvas.get(0);
 
-        return DespesaMapper.toResponse(result.stream().findAny().get());
+        return DespesaMapper.toResponse(despesaSalva);
     }
 
     public List<DespesaResponse> get(long idCliente, int mes, int ano) {

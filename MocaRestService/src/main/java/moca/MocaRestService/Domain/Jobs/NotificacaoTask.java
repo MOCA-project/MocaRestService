@@ -40,9 +40,8 @@ public class NotificacaoTask {
             }
         }
 
-        if (enviar){
+        if (enviar)
             twilioService.enviarAvisoLimite(numero);
-        }
 
     }
     private static double getPorcentagem(double total, double utilizado){

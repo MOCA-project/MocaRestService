@@ -1,9 +1,8 @@
 package moca.MocaRestService.Domain.Services;
 
-import com.twilio.type.Client;
 import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
-import moca.MocaRestService.Domain.Helper.ListaGenerica.ListaObj;
+import moca.MocaRestService.Domain.Helper.GenericTypes.ListaObj;
 import moca.MocaRestService.Domain.Mappers.ClienteMapper;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
