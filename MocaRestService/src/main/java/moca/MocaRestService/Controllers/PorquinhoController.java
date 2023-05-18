@@ -3,6 +3,7 @@ package moca.MocaRestService.Controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import moca.MocaRestService.Domain.Models.Responses.HistoricoPorquinho;
 import moca.MocaRestService.Infrastructure.Entities.Porquinho;
 import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;
@@ -70,4 +71,10 @@ public class PorquinhoController {
     public ResponseEntity<Void> finalizarPorquinho (@PathVariable long idCliente, @PathVariable long idPorquinho){
         return service.finalizarPorquinho(idCliente,idPorquinho);
     }
+
+    @GetMapping("/historico/{idPorquinho}")
+    public ResponseEntity<HistoricoPorquinho> historico (@PathVariable long idPorquinho){
+        return ResponseEntity.ok().body(service.getHistorico(idPorquinho));
+    }
+
 }

@@ -9,7 +9,9 @@ public enum TipoReceitaEnum {
     Ajuda(6, "Ajuda financeira"),
     Reembolsos(7, "Reembolsos"),
     Premios(8, "Prêmios"),
-    Outros(9, "Outros");
+    Outros(9, "Outros"),
+    Porquinho(10, "Porquinho");
+
 
     private final int id;
     private final String descricao;

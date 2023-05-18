@@ -30,6 +30,18 @@ public class Receita {
     @Column(name = "id_tipo_receita")
     private Long idTipoReceita;
 
+    @Basic
+    @Column(name = "id_porquinho")
+    private Long idPorquinho;
+
+    public Long getIdPorquinho() {
+        return idPorquinho;
+    }
+
+    public void setIdPorquinho(Long idPorquinho) {
+        this.idPorquinho = idPorquinho;
+    }
+
     public long getIdReceita() {
         return idReceita;
     }

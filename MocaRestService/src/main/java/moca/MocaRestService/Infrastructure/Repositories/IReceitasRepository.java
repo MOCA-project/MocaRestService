@@ -18,4 +18,7 @@ public interface IReceitasRepository extends JpaRepository<Receita, Long> {
             "and MONTH(r.data) = ?2 " +
             "and YEAR(r.data) = ?3 ")
     List<Receita> getReceitasMesLista(long idCliente, int mes, int ano);
+
+    @Query(value = "select r from Receita r where r.idPorquinho  = ?1 ")
+    List<Receita> getSaquesPorquinho(long idPorquinho);
 }
