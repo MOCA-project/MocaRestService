@@ -38,10 +38,11 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Download artifact from build job
+      - name: Download JAR
+        #Download the artifact which was uploaded in the build's job
         uses: actions/download-artifact@v2
         with:
-          name: java-app
+          name: artifact
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
