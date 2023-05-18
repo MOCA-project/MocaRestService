@@ -42,7 +42,7 @@ jobs:
         #Download the artifact which was uploaded in the build's job
         uses: actions/download-artifact@v2
         with:
-          name: java-app
+          name: java-app.jar
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
