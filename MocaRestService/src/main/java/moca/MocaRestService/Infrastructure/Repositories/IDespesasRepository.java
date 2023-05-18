@@ -40,4 +40,7 @@ public interface IDespesasRepository extends JpaRepository<Despesa, Long> {
             "and d.isCartao = true " +
             "and d.idCartao = ?2")
     double getGastosCartoesTotal(long idCliente, long idCartao);
+
+    @Query(value = "select d from Despesa d where d.idPorquinho  = ?1 ")
+    List<Despesa> getDepositosPorquinho(long idPorquinho);
 }

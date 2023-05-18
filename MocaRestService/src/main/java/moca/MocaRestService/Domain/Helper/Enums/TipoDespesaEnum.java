@@ -10,7 +10,8 @@ public enum TipoDespesaEnum {
     Vestuario(7, "Vestuário"),
     Dividas(8, "Dívidas"),
     Impostos(9, "Impostos"),
-    Outros(10, "Outros");
+    Outros(10, "Outros"),
+    Porquinho(11, "Porquinho");
 
     private final int id;
     private final String descricao;

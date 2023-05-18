@@ -38,6 +38,22 @@ public class Despesa {
     @Column(name = "id_cartao")
     private Long idCartao;
 
+    @Basic
+    @Column(name = "id_porquinho")
+    private Long idPorquinho;
+
+    public Long getIdCartao() {
+        return idCartao;
+    }
+
+    public Long getIdPorquinho() {
+        return idPorquinho;
+    }
+
+    public void setIdPorquinho(Long idPorquinho) {
+        this.idPorquinho = idPorquinho;
+    }
+
     public long getIdDespesa() {
         return idDespesa;
     }
