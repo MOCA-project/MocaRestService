@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: target/data-0.0.1-SNAPSHOT.jar
+          path: /home/runner/work/MocaRestService/MocaRestService/MocaRestService/target/MocaRestService-0.0.1-SNAPSHOT.jar
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
         #Download the artifact which was uploaded in the build's job
         uses: actions/download-artifact@v2
         with:
-          name: java-app.jar
+          name: java-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
