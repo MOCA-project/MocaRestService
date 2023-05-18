@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      
+      - uses: actions/checkout@v2
+
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
           java-version: '11'
-        
+
       - name: Build with Maven
         run: mvn -B package -DskipTests --file MocaRestService/pom.xml
 
@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: /home/runner/work/MocaRestService/MocaRestService/MocaRestService/target/MocaRestService-0.0.1-SNAPSHOT.jar
+          path: '${{ github.workspace }}/MocaRestService/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -38,8 +38,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Download JAR
-        #Download the artifact which was uploaded in the build's job
+      - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: java-app
@@ -50,5 +49,5 @@ jobs:
         with:
           app-name: 'moca-rest-service'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BF3AD34FF9D647009B2F55D04A22666C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_38493E9C78AC4603AB44127218AD10E7 }}
           package: '*.jar'
