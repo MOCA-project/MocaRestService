@@ -132,7 +132,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>src/main/java/moca/MocaRestService/MocaRestServiceApplication.java</mainClass>
+							<mainClass>moca.MocaRestService.MocaRestServiceApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
