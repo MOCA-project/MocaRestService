@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       - name: Set up Java version
         uses: actions/setup-java@v1
@@ -25,7 +25,7 @@ jobs:
         run: mvn -B package -DskipTests --file MocaRestService/pom.xml
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
@@ -40,10 +40,10 @@ jobs:
     steps:
       - name: Download JAR
         #Download the artifact which was uploaded in the build's job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: target
+          path: '${{ github.workspace }}/target/'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
