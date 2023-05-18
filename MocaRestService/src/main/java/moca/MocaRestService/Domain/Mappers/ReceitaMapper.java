@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Mappers;
 
+import moca.MocaRestService.Domain.Helper.Enums.TipoReceitaEnum;
 import moca.MocaRestService.Domain.Models.Requests.ReceitaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
@@ -15,7 +16,7 @@ public class ReceitaMapper {
                 receita.getValor(),
                 receita.getData(),
                 receita.getIdCliente(),
-                receita.getIdTipoReceita()
+                TipoReceitaEnum.getByID(receita.getIdTipoReceita().intValue())
         );
     }
 
@@ -39,7 +40,7 @@ public class ReceitaMapper {
                     reeceita.getValor(),
                     reeceita.getData(),
                     reeceita.getIdCliente(),
-                    reeceita.getIdTipoReceita()
+                    TipoReceitaEnum.getByID(reeceita.getIdTipoReceita().intValue())
             ));
         }
         return response;

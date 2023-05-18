@@ -37,4 +37,13 @@ public class CartaoController {
         var result = service.get(idCliente, mes, ano);
         return ResponseEntity.status(200).body(result);
     }
+
+    @Operation(summary = "Remove um cartão na base de dados", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @DeleteMapping("{idCartao}")
+    public ResponseEntity<Void> get(@PathVariable long idCartao){
+        service.remove(idCartao);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Interfaces.IEmailSenderService;
-import moca.MocaRestService.CrossCutting.GoogleSMTPIntegration.Models.EmailDetails;
 import moca.MocaRestService.CrossCutting.TwilioIntegration.Interfaces.ITwilioService;
 import moca.MocaRestService.CrossCutting.TwilioIntegration.Models.SmsSenderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +31,13 @@ public class NotificacoesController {
         return ResponseEntity.status(201).body(result);
     }
 
-    @Operation(summary = "Envia um e-mail com o lembrete de cadastro de despesas", responses = {
+    @Operation(summary = "Envia um e-mail com o lembrete de cadastro de despesas para os clientes que estão " +
+            "há 3 dias sem efetuar login", responses = {
             @ApiResponse(responseCode = "200")
     })
     @PostMapping("email")
-    public ResponseEntity<String> sendEmail(@RequestBody EmailDetails emailDetails) throws Exception {
-        var result =  emailService.sendMail(emailDetails);
-        return ResponseEntity.status(201).body(result);
+    public ResponseEntity<Void> sendEmail() throws Exception {
+        emailService.sendMail();
+        return ResponseEntity.status(201).build();
     }
 }

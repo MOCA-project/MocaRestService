@@ -2,7 +2,6 @@ package moca.MocaRestService.Domain.Models.Responses;
 
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 
-//retornar
 public class ClienteResponse {
     private long id;
     private String nome;

@@ -22,7 +22,6 @@ public class PorquinhoController {
     @Autowired
     PorquinhoService service;
 
-
     @Operation(summary = "Cria um porquinho na base de dados", responses = {
             @ApiResponse(responseCode = "200")
     })

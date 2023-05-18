@@ -3,6 +3,7 @@ package moca.MocaRestService.Controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import moca.MocaRestService.Domain.Models.Requests.PatchReceitaRequest;
 import moca.MocaRestService.Domain.Models.Requests.ReceitaRequest;
 import moca.MocaRestService.Domain.Models.Responses.ReceitaResponse;
 import moca.MocaRestService.Domain.Services.ReceitasService;
@@ -57,6 +58,16 @@ public class ReceitaController {
                                        @PathVariable int mes,
                                        @PathVariable int ano){
         var result = service.get(idCliente, mes, ano);
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @Operation(summary = "Editar a receita ", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404")
+    })
+    @GetMapping("{idReceita}")
+    public ResponseEntity<ReceitaResponse> edit(@PathVariable long idReceita, @RequestBody PatchReceitaRequest request){
+        var result = service.edit(idReceita, request);
         return ResponseEntity.status(200).body(result);
     }
 }

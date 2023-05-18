@@ -1,12 +1,18 @@
 package moca.MocaRestService.Domain.Models.Requests;
 
-//inserir, front nos manda
-public class ClienteRequest {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+public class ClienteRequest {
+    @NotNull
     private String nome;
+    @Email
     private String email;
+    @Size(min = 6, max = 20)
     private String senha;
     private long idTipoPerfil;
+    private String telefone;
 
     public String getSenha() {
         return senha;
@@ -38,5 +44,13 @@ public class ClienteRequest {
 
     public void setIdTipoPerfil(long idTipoPerfil) {
         this.idTipoPerfil = idTipoPerfil;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

@@ -1,4 +1,4 @@
-package moca.MocaRestService.Domain.Helper.ListaGenerica;
+package moca.MocaRestService.Domain.Helper.GenericTypes;
 
 import java.util.List;
 

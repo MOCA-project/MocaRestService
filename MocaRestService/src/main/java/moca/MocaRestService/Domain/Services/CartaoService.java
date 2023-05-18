@@ -1,5 +1,6 @@
 package moca.MocaRestService.Domain.Services;
 
+import moca.MocaRestService.CrossCutting.TwilioIntegration.Services.TwilioService;
 import moca.MocaRestService.Domain.Mappers.CartaoMapper;
 import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
@@ -20,6 +21,8 @@ public class CartaoService {
     private IDespesasRepository despesasRepository;
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private TwilioService twilioService;
 
     public CartaoResponse add(CartaoRequest request) {
         var cartao = CartaoMapper.toCartao(request);
@@ -30,12 +33,12 @@ public class CartaoService {
     }
 
     public CartoesHomeResponse get(long idCliente, int mes, int ano) {
-        clienteService.foundClienteOrThrow(idCliente);
+
         var response = new CartoesHomeResponse();
         var cartoes = repository.findByIdCliente(idCliente);
 
-        for (Cartao cartao : cartoes){
-            var gasto = despesasRepository.getGastosCartoes(idCliente, mes, ano, cartao.getIdCartao());
+        cartoes.stream().forEach(cartao -> {
+            var gasto = despesasRepository.getGastosCartoesTotal(idCliente, cartao.getIdCartao());
             response.add(new CartoesHomeCartao(
                     cartao.getLimite(),
                     gasto,
@@ -46,12 +49,17 @@ public class CartaoService {
                     cartao.getApelido(),
                     cartao.getIdCartao()
             ));
-        }
+        });
+
         return response;
     }
 
     private static double getPorcentagem(double total, double utilizado){
         double porcentagem =  (utilizado * 100) / total;
         return Math.floor(porcentagem * 100) / 100;
+    }
+
+    public void remove(long idCartao) {
+         repository.deleteById(idCartao);
     }
 }
