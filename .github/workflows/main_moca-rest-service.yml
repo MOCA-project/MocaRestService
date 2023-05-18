@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'moca-rest-service'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_670BA221A55841229BBA005FC5BC0C18 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BF3AD34FF9D647009B2F55D04A22666C }}
           package: '*.jar'
