@@ -4,9 +4,11 @@ import moca.MocaRestService.Domain.Helper.Enums.TipoDespesaEnum;
 import moca.MocaRestService.Domain.Helper.Enums.TipoReceitaEnum;
 import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
+import moca.MocaRestService.Infrastructure.Entities.Porquinho;
 import moca.MocaRestService.Infrastructure.Entities.Receita;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
+import moca.MocaRestService.Infrastructure.Repositories.IPorquinhoRepository;
 import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
 import moca.MocaRestService.Domain.Models.Responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +26,20 @@ public class HomeService {
     @Autowired
     private IReceitasRepository receitasRepository;
     @Autowired
-    private ClienteService clienteService;
-    @Autowired
     private ICartoesRepository cartoesRepository;
+
+    @Autowired
+    private IPorquinhoRepository porquinhoRepository;
     public HomeResponse getHome(long idCliente, int mes, int ano){
         var home = new HomeResponse();
-        long inicio1 = System.currentTimeMillis();
-        var despesasLista = despesasRepository.getDespesasLista(idCliente, mes, ano);
-        long fim1 = System.currentTimeMillis();
-        long inicio2 = System.currentTimeMillis();
-        var cartoes = cartoesRepository.findByIdCliente(idCliente);
-        long fim2 = System.currentTimeMillis();
-        long inicio3 = System.currentTimeMillis();
-        var receitasLista = receitasRepository.getReceitasMesLista(idCliente, mes, ano);
-        long fim3 = System.currentTimeMillis();
 
-        System.out.println("Tempo de execução: " + (fim1 - inicio1) + "ms");
-        System.out.println("Tempo de execução: " + (fim2- inicio2) + "ms");
-        System.out.println("Tempo de execução: " + (fim3 - inicio3) + "ms");
+        var despesasLista = despesasRepository.getDespesasLista(idCliente, mes, ano);
+
+        var cartoes = cartoesRepository.findByIdCliente(idCliente);
+
+        var receitasLista = receitasRepository.getReceitasMesLista(idCliente, mes, ano);
+
+        var porquinhos = porquinhoRepository.findAllByIdCliente(idCliente);
 
         double despesasPagas = despesasLista.stream()
                 .filter(despesa -> despesa.getPaid())
@@ -66,6 +64,14 @@ public class HomeService {
             cartoesHome.add(new CartaoHome(cartao.getBandeira(), cartao.getIdCorCartao(), cartao.getApelido()));
         }
 
+        List<PorquinhoResponse> porquinhoHome = new ArrayList<>();
+        for (Porquinho porquinho : porquinhos){
+            porquinhoHome.add(new PorquinhoResponse(porquinho.getIdPorquinho(),
+                    porquinho.getNome(), porquinho.getValorFinal(), porquinho.getValorAtual(),
+                    porquinho.getConcluido(), porquinho.getIdCliente()));
+        }
+
+
         home.setGraficoDespesas(getGraficosDespesa(despesasLista));
         home.setGraficoReceitas(getGraficosReceitas(receitasLista));
         home.setDespesas(despesas);
@@ -73,7 +79,7 @@ public class HomeService {
         home.setSaldo(receitas - despesasPagas);
         home.setDespesaCartao(despesasCartao);
         home.setCartoes(cartoesHome);
-
+        home.setPorquinhos(porquinhoHome);
         return home;
     }
 

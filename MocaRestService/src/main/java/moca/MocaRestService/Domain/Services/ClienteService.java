@@ -4,6 +4,7 @@ import moca.MocaRestService.Configuration.Security.Jwt.GerenciadorTokenJwt;
 import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Helper.GenericTypes.ListaObj;
 import moca.MocaRestService.Domain.Mappers.ClienteMapper;
+import moca.MocaRestService.Domain.Models.Requests.ConfigRequest;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioLoginDTO;
@@ -62,7 +63,6 @@ public class ClienteService {
             clientes.add(listaClientes.getElemento(i));
         }
 
-        // Ordena a lista de clientes pelo nome
         clientes.sort(Comparator.comparing(Cliente::getNome));
 
         return clientes;
@@ -104,4 +104,39 @@ public class ClienteService {
                 usuarioAutenticado.getIdPerfil());
     }
 
+    public ClienteResponse putConfig(Long idCliente, ConfigRequest request) {
+        var cliente = clienteRepository.findById(idCliente).get();
+
+        cliente.setEmail(request.getEmail() != cliente.getEmail() ? request.getEmail() : cliente.getEmail());
+        cliente.setTelefone(request.getNumeroCelular() != cliente.getTelefone() ? request.getNumeroCelular() : cliente.getTelefone());
+        cliente.setEnviaEmail(request.isEnviarEmail() != cliente.isEnviaEmail() ? request.isEnviarEmail() : cliente.isEnviaEmail());
+        cliente.setEnviaEmail(request.isEnviarSms() != cliente.isEnviaSms() ? request.isEnviarSms() : cliente.isEnviaSms());
+
+        clienteRepository.save(cliente);
+
+        return new ClienteResponse(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getIdPerfil(),
+                cliente.getTelefone(),
+                cliente.isEnviaEmail(),
+                cliente.isEnviaEmail()
+        );
+
+    }
+
+    public ClienteResponse getConfig(Long idCliente) {
+        var cliente = clienteRepository.findById(idCliente).get();
+
+        return new ClienteResponse(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getIdPerfil(),
+                cliente.getTelefone(),
+                cliente.isEnviaEmail(),
+                cliente.isEnviaEmail()
+        );
+    }
 }

@@ -1,8 +1,6 @@
 package moca.MocaRestService.Domain.Jobs;
 
-import moca.MocaRestService.CrossCutting.TwilioIntegration.Models.SmsSenderRequest;
 import moca.MocaRestService.CrossCutting.TwilioIntegration.Services.TwilioService;
-import moca.MocaRestService.Domain.Models.Responses.CartoesHomeCartao;
 import moca.MocaRestService.Domain.Services.ClienteService;
 import moca.MocaRestService.Infrastructure.Entities.Cartao;
 import moca.MocaRestService.Infrastructure.Repositories.ICartoesRepository;
@@ -10,8 +8,6 @@ import moca.MocaRestService.Infrastructure.Repositories.IDespesasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 
 @Component
 public class NotificacaoTask {
@@ -28,6 +24,7 @@ public class NotificacaoTask {
     public void revisarLimiteUtilizado(Long idCliente) {
         boolean enviar = false;
         var cliente = clienteService.getClienteOrThrow(idCliente);
+
         var numero = cliente.getTelefone();
         var cartoes = cartoesRepository.findByIdCliente(idCliente);
 
@@ -35,7 +32,8 @@ public class NotificacaoTask {
             var gasto = despesasRepository.getGastosCartoesTotal(
                     idCliente, cartao.getIdCartao());
 
-            if (getPorcentagem(cartao.getLimite(), gasto) > 75){
+            if (getPorcentagem(cartao.getLimite(), gasto) > 75 &&
+            cliente.isEnviaSms()){
                 enviar = true;
             }
         }

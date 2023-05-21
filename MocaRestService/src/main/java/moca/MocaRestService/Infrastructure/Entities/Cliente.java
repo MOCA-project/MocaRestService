@@ -31,6 +31,29 @@ public class Cliente {
     @Column(name = "telefone")
     private String telefone;
 
+    @Basic
+    @Column(name = "envia_email")
+    private boolean enviaEmail;
+    @Basic
+    @Column(name = "envia_sms")
+    private boolean enviaSms;
+
+    public boolean isEnviaEmail() {
+        return enviaEmail;
+    }
+
+    public void setEnviaEmail(boolean enviaEmail) {
+        this.enviaEmail = enviaEmail;
+    }
+
+    public boolean isEnviaSms() {
+        return enviaSms;
+    }
+
+    public void setEnviaSms(boolean enviaSms) {
+        this.enviaSms = enviaSms;
+    }
+
     public long getId() {
         return id;
     }

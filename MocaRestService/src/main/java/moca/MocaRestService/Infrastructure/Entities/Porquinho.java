@@ -24,9 +24,7 @@ public class Porquinho {
     @Basic
     @Column(name = "id_cliente")
     private Long idCliente;
-//    @Basic
-//    @Column(name = "id_obj")
-//    private Long idObj;
+
 
     public long getIdPorquinho() {
         return idPorquinho;
