@@ -10,6 +10,7 @@ public class HomeResponse {
     private List<CartaoHome> cartoes;
     private GraficoReceitas graficoReceitas;
     private GraficoDespesas graficoDespesas;
+    private List<PorquinhoResponse> porquinhos;
 
     public double getSaldo() {
         return saldo;
@@ -65,6 +66,14 @@ public class HomeResponse {
 
     public void setGraficoDespesas(GraficoDespesas graficoDespesas) {
         this.graficoDespesas = graficoDespesas;
+    }
+
+    public List<PorquinhoResponse> getPorquinhos() {
+        return porquinhos;
+    }
+
+    public void setPorquinhos(List<PorquinhoResponse> porquinhos) {
+        this.porquinhos = porquinhos;
     }
 }
 

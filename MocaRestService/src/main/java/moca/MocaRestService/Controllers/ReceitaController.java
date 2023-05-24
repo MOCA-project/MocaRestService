@@ -65,7 +65,7 @@ public class ReceitaController {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404")
     })
-    @GetMapping("{idReceita}")
+    @PatchMapping("{idReceita}")
     public ResponseEntity<ReceitaResponse> edit(@PathVariable long idReceita, @RequestBody PatchReceitaRequest request){
         var result = service.edit(idReceita, request);
         return ResponseEntity.status(200).body(result);

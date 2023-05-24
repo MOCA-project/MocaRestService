@@ -14,7 +14,6 @@ public class PorquinhoResponse {
 
     private long idCliente;
 
-
     public PorquinhoResponse(long id, String nome, double valorFinal, double valorAtual, Boolean isConcluido, long idCliente) {
         this.id = id;
         this.nome = nome;

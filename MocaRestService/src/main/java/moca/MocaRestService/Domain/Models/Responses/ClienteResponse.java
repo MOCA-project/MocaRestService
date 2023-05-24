@@ -7,12 +7,43 @@ public class ClienteResponse {
     private String nome;
     private String email;
     private long idTipoPerfil;
+    private String telefone;
+    private boolean enviaEmail;
+    private boolean enviaSms;
 
-    public ClienteResponse(long id, String nome, String email, long idTipoPerfil) {
+
+    public ClienteResponse(long id, String nome, String email, long idTipoPerfil, String telefone, boolean enviaEmail, boolean enviaSms) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.idTipoPerfil = idTipoPerfil;
+        this.telefone = telefone;
+        this.enviaEmail = enviaEmail;
+        this.enviaSms = enviaSms;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public boolean isEnviaEmail() {
+        return enviaEmail;
+    }
+
+    public void setEnviaEmail(boolean enviaEmail) {
+        this.enviaEmail = enviaEmail;
+    }
+
+    public boolean isEnviaSms() {
+        return enviaSms;
+    }
+
+    public void setEnviaSms(boolean enviaSms) {
+        this.enviaSms = enviaSms;
     }
 
     public long getId() {

@@ -39,7 +39,8 @@ public class EmailSenderService implements IEmailSenderService {
         FilaObj<String> filaEmails = new FilaObj<>(clientes.size());
 
         for (Cliente cliente : clientes) {
-            if (LocalDate.now().minusDays(3).isAfter(cliente.getUltimoAcesso())) {
+            if (LocalDate.now().minusDays(3).isAfter(cliente.getUltimoAcesso()) &&
+            cliente.isEnviaEmail()) {
                 filaEmails.insert(cliente.getEmail());
             }
         }
