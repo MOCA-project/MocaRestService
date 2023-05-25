@@ -34,9 +34,13 @@ public class PorquinhoController {
     @Operation(summary = "Retorna todos os porquihnhos", responses = {
             @ApiResponse(responseCode = "200")
     })
-    @GetMapping
-    public List<Porquinho> get(){
-        return service.getAllPorquinho();
+    @GetMapping("{idCliente}")
+    public ResponseEntity<List<Porquinho>> get(@PathVariable Long idCliente){
+        var result = service.getAllPorquinhoByIdCliente(idCliente);
+        if (result.isEmpty())
+            ResponseEntity.noContent().build();
+
+        return ResponseEntity.status(200).body(service.getAllPorquinhoByIdCliente(idCliente));
     }
 
     @GetMapping("/{idCliente}/{idPorquinho}")

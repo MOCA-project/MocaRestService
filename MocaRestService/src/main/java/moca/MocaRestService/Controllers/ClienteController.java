@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioLoginDTO;
 import moca.MocaRestService.Domain.Autenticacao.UsuarioTokenDTO;
 import moca.MocaRestService.Domain.Models.Requests.ClienteRequest;
+import moca.MocaRestService.Domain.Models.Requests.ConfigRequest;
 import moca.MocaRestService.Domain.Models.Responses.ClienteResponse;
 import moca.MocaRestService.Domain.Services.ClienteService;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "Usuários", description = "Grupo de requisições de usuário")
@@ -47,6 +49,24 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<Cliente>> getAll(){
         var result = service.getAll();
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @Operation(summary = "Retorna as configurações do usuário", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @GetMapping("config/{idCliente}")
+    public ResponseEntity<ClienteResponse> getConfig(@PathVariable Long idCliente){
+        var result = service.getConfig(idCliente);
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @Operation(summary = "Altera as onfigurações do usuário", responses = {
+            @ApiResponse(responseCode = "200")
+    })
+    @PatchMapping("config/{idCliente}")
+    public ResponseEntity<ClienteResponse> putConfig(@PathVariable Long idCliente, @RequestBody @Valid ConfigRequest request){
+        var result = service.putConfig(idCliente, request);
         return ResponseEntity.status(200).body(result);
     }
 

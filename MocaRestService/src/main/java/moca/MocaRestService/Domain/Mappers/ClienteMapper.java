@@ -20,7 +20,10 @@ public class ClienteMapper {
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getEmail(),
-                cliente.getIdPerfil()
+                cliente.getIdPerfil(),
+                cliente.getTelefone(),
+                cliente.isEnviaEmail(),
+                cliente.isEnviaSms()
         );
     }
 

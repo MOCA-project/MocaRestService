@@ -56,8 +56,8 @@ public class PorquinhoService {
 
     }
 
-    public List<Porquinho> getAllPorquinho (){
-        return porquinhoRepository.findAll();
+    public List<Porquinho> getAllPorquinhoByIdCliente (Long idCliente){
+        return porquinhoRepository.findAllByIdCliente(idCliente);
     }
 
     public PorquinhoResponse getPorquinhoId (long idCliente, long idPorquinho){
