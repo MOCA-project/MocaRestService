@@ -77,12 +77,9 @@ public class PorquinhoController {
     }
 
     @GetMapping("historico/{idPorquinho}")
-    public ResponseEntity<HistoricoPorquinho> historico (@PathVariable long idPorquinho){
+    public HistoricoPorquinho historico (@PathVariable long idPorquinho){
         var result = service.getHistorico(idPorquinho);
-        if (result.isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok().body(result);
+        return result;
     }
 
 }

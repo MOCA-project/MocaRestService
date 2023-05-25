@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoricoPorquinho {
-    private List<HistoricoPorquinhoItem> items;
+    private List<HistoricoPorquinhoItem> items = new ArrayList<>();
 
     public HistoricoPorquinho() {
         this.items = new ArrayList<>();
@@ -14,7 +14,11 @@ public class HistoricoPorquinho {
         this.items.add(item);
     }
 
-    public boolean isEmpty(){
-        return items.isEmpty();
+    public List<HistoricoPorquinhoItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<HistoricoPorquinhoItem> items) {
+        this.items = items;
     }
 }
