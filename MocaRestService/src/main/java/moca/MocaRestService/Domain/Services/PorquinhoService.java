@@ -43,6 +43,7 @@ public class PorquinhoService {
         newPorquinho.setValorFinal(request.getValorFinal());
         newPorquinho.setValorAtual(request.getValorAtual());
         newPorquinho.setNome(request.getNome());
+        newPorquinho.setIdIcone(request.getIdIcone());
 
         Porquinho porquinho =  porquinhoRepository.save(newPorquinho);
 

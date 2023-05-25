@@ -11,6 +11,7 @@ public class PorquinhoRequest {
     private Boolean isConcluido;
 
     private long idCliente;
+    private int idIcone;
 
     public String getNome() {
         return nome;
@@ -52,4 +53,15 @@ public class PorquinhoRequest {
         this.idCliente = idCliente;
     }
 
+    public void setConcluido(Boolean concluido) {
+        isConcluido = concluido;
+    }
+
+    public int getIdIcone() {
+        return idIcone;
+    }
+
+    public void setIdIcone(int idIcone) {
+        this.idIcone = idIcone;
+    }
 }

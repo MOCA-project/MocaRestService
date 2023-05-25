@@ -111,7 +111,6 @@ public class ClienteService {
         cliente.setTelefone(request.getNumeroCelular() != cliente.getTelefone() ? request.getNumeroCelular() : cliente.getTelefone());
         cliente.setEnviaEmail(request.isEnviarEmail() != cliente.isEnviaEmail() ? request.isEnviarEmail() : cliente.isEnviaEmail());
         cliente.setEnviaEmail(request.isEnviarSms() != cliente.isEnviaSms() ? request.isEnviarSms() : cliente.isEnviaSms());
-
         clienteRepository.save(cliente);
 
         return new ClienteResponse(
