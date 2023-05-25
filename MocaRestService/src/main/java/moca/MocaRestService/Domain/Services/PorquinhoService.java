@@ -144,6 +144,7 @@ public class PorquinhoService {
 
     public HistoricoPorquinho getHistorico(long idPorquinho){
         var response = new HistoricoPorquinho();
+
         var depositos = despesasRepository.getDepositosPorquinho(idPorquinho);
         var saques = receitasRepository.getSaquesPorquinho(idPorquinho);
 
