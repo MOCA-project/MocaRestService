@@ -48,6 +48,8 @@ public class ClienteService {
         request.setSenha(senhaCriptografada);
 
         Cliente newCliente = ClienteMapper.toCliente(request);
+        newCliente.setEnviaEmail(true);
+        newCliente.setEnviaSms(true);
         Cliente cliente =  clienteRepository.save(newCliente);
 
         return ClienteMapper.toResponse(cliente);
@@ -107,10 +109,11 @@ public class ClienteService {
     public ClienteResponse putConfig(Long idCliente, ConfigRequest request) {
         var cliente = clienteRepository.findById(idCliente).get();
 
-        cliente.setEmail(request.getEmail() != cliente.getEmail() ? request.getEmail() : cliente.getEmail());
-        cliente.setTelefone(request.getNumeroCelular() != cliente.getTelefone() ? request.getNumeroCelular() : cliente.getTelefone());
+        cliente.setEmail(request.getEmail() != cliente.getEmail() && request.getEmail() != null ? request.getEmail() : cliente.getEmail());
+        cliente.setTelefone(request.getNumeroCelular() != cliente.getTelefone()  && request.getNumeroCelular() != null ? request.getNumeroCelular() : cliente.getTelefone());
         cliente.setEnviaEmail(request.isEnviarEmail() != cliente.isEnviaEmail() ? request.isEnviarEmail() : cliente.isEnviaEmail());
-        cliente.setEnviaEmail(request.isEnviarSms() != cliente.isEnviaSms() ? request.isEnviarSms() : cliente.isEnviaSms());
+        cliente.setEnviaSms(request.isEnviarSms() != cliente.isEnviaSms() ? request.isEnviarSms() : cliente.isEnviaSms());
+
         clienteRepository.save(cliente);
 
         return new ClienteResponse(
