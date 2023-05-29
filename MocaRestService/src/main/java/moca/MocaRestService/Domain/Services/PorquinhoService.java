@@ -43,6 +43,7 @@ public class PorquinhoService {
         newPorquinho.setValorFinal(request.getValorFinal());
         newPorquinho.setValorAtual(request.getValorAtual());
         newPorquinho.setNome(request.getNome());
+        newPorquinho.setIdIcone(request.getIdIcone());
 
         Porquinho porquinho =  porquinhoRepository.save(newPorquinho);
 
@@ -144,6 +145,7 @@ public class PorquinhoService {
 
     public HistoricoPorquinho getHistorico(long idPorquinho){
         var response = new HistoricoPorquinho();
+
         var depositos = despesasRepository.getDepositosPorquinho(idPorquinho);
         var saques = receitasRepository.getSaquesPorquinho(idPorquinho);
 

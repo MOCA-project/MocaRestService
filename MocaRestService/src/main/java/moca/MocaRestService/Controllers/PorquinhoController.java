@@ -76,9 +76,10 @@ public class PorquinhoController {
         return service.finalizarPorquinho(idCliente,idPorquinho);
     }
 
-    @GetMapping("/historico/{idPorquinho}")
-    public ResponseEntity<HistoricoPorquinho> historico (@PathVariable long idPorquinho){
-        return ResponseEntity.ok().body(service.getHistorico(idPorquinho));
+    @GetMapping("historico/{idPorquinho}")
+    public HistoricoPorquinho historico (@PathVariable long idPorquinho){
+        var result = service.getHistorico(idPorquinho);
+        return result;
     }
 
 }

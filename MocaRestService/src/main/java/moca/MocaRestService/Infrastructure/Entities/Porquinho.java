@@ -24,6 +24,9 @@ public class Porquinho {
     @Basic
     @Column(name = "id_cliente")
     private Long idCliente;
+    @Basic
+    @Column(name = "id_icone")
+    private int idIcone;
 
 
     public long getIdPorquinho() {
@@ -74,13 +77,13 @@ public class Porquinho {
         this.idCliente = idCliente;
     }
 
-//    public Long getIdObj() {
-//        return idObj;
-//    }
-//
-//    public void setIdObj(Long idObj) {
-//        this.idObj = idObj;
-//    }
+    public int getIdIcone() {
+        return idIcone;
+    }
+
+    public void setIdIcone(int idIcone) {
+        this.idIcone = idIcone;
+    }
 
     @Override
     public boolean equals(Object o) {
