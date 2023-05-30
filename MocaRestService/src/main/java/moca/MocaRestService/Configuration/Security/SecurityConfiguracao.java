@@ -48,9 +48,10 @@ public class SecurityConfiguracao {
             new AntPathRequestMatcher("/swagger-ui/**"),
             new AntPathRequestMatcher("/usuario/**"),
             new AntPathRequestMatcher("/notificacoes/**"),
-            // Descomente para desabilitar a necessidade do token
             new AntPathRequestMatcher("/**"),
-            new AntPathRequestMatcher("/h2-console/**")
+            new AntPathRequestMatcher("/h2-console/**"),
+            new AntPathRequestMatcher("https://moca-project.vercel.app"),
+
     };
 
     @Bean
@@ -112,6 +113,7 @@ public class SecurityConfiguracao {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOriginPatterns(Collections.singletonList(ORIGENS_PERMITIDAS));
+        configuration.setAllowedOrigins(Collections.singletonList("https://moca-project.vercel.app"));
         configuration.setAllowedMethods(
                 Arrays.asList(
                         HttpMethod.GET.name(),
