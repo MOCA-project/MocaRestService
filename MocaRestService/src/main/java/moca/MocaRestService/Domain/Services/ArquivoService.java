@@ -34,7 +34,5 @@ public class ArquivoService {
                 arquivo.getCategoria(),
                 arquivo.getValor(),
                 arquivo.getIdCliente());
-
-
     }
 }
