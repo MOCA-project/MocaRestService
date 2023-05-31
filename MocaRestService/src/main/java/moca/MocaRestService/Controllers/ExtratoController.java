@@ -33,8 +33,10 @@ public class ExtratoController {
     ArquivoService arquivoService;
 
     Path diretorioBase = Path.of(System.getProperty("user.dir"));
+
     Path txtBase = Paths.get("").toAbsolutePath();
-    Path diretorioBase2 = Paths.get(txtBase + "/extrato.txt");
+    private Path diretorioBase2;
+    //Path diretorioBase2 = Paths.get(txtBase + "/extrato");
 
 
     @Operation(summary = "Retorna o extrato do cliente referente a data solicitada", responses = {
@@ -88,7 +90,9 @@ public class ExtratoController {
                                               @PathVariable int ano) {
         //clienteService.foundClienteOrThrow(idCliente);
         List<ExtratoResponse> listaExtrato = Collections.singletonList(service.get(idCliente, mes, ano));
-        service.gravaArquivoTxt(listaExtrato, "extrato");
+        service.gravaArquivoTxt(listaExtrato, "extrato" + idCliente);
+
+        diretorioBase2 = Paths.get(txtBase + "/extrato" + idCliente);
 
         File file = this.diretorioBase2.toFile();
 
@@ -97,10 +101,10 @@ public class ExtratoController {
 
             return ResponseEntity.status(200)
                     .header("Content-Disposition",
-                            "attachment; filename=" + "extrato.txt")
+                            "attachment; filename=" + "extrato"+idCliente+".txt")
                     .body(fileInputStream.readAllBytes());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+                e.printStackTrace();
             throw new ResponseStatusException(422, "Diretório não encontrado", null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -127,7 +131,6 @@ public class ExtratoController {
             throw new RuntimeException(e);
         }
 
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String situacao = itemString.substring(39, 47).trim();
         LocalDate data = LocalDate.parse(itemString.substring(47, 57).trim());
         String descricao = itemString.substring(57, 107).trim();
@@ -139,6 +142,5 @@ public class ExtratoController {
 
         arquivoService.saveArquivo(response);
         return ResponseEntity.status(201).body(response);
-
     }
 }
