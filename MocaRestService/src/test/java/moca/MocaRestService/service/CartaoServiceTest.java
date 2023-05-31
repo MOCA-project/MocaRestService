@@ -56,18 +56,18 @@ public class CartaoServiceTest {
 
     }
 
-//    @Test
-//    @DisplayName("Deve retornar lista vazia quando nao houver cartoes")
-//    void deveRetornarListaVaziaQuandoNaoHouverCartoes() {
-//
-//        int quantidadeEsperada = 0;
-//
-//        //List<CartoesHomeResponse> resultado = cartaoService.get(1l,4,2023);
-//
-//        //assert
-//        assertTrue(resultado.isEmpty());
-//        assertEquals(quantidadeEsperada, resultado.size());
-//    }
+    @Test
+    @DisplayName("Deve retornar lista vazia quando nao houver cartoes")
+    void deveRetornarListaVaziaQuandoNaoHouverCartoes() {
+
+        int quantidadeEsperada = 0;
+
+        List<CartoesHomeResponse> resultado = Collections.singletonList(cartaoService.get(1l, 4, 2023));
+
+        //assert
+        assertTrue(resultado.isEmpty());
+        assertEquals(quantidadeEsperada, resultado.size());
+    }
 
 @Test
 @DisplayName("Deve criar um cartão quando informado dados válidos")

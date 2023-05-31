@@ -1,12 +1,9 @@
 package moca.MocaRestService.service;
 import moca.MocaRestService.Domain.Models.Requests.ClienteRequest;
 import moca.MocaRestService.Domain.Models.Requests.ConfigRequest;
-import moca.MocaRestService.Domain.Models.Requests.PatchReceitaRequest;
-import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.ClienteResponse;
 import moca.MocaRestService.Domain.Services.ClienteService;
 import moca.MocaRestService.Infrastructure.Entities.Cliente;
-import moca.MocaRestService.Infrastructure.Entities.Porquinho;
 import moca.MocaRestService.Infrastructure.Repositories.IClienteRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,16 +12,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.mockito.stubbing.OngoingStubbing;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,8 +53,8 @@ public class ClienteSerivceTest {
     }
 
     @Test
-    @DisplayName("Deve criar produto quando informar dados validos")
-    void deveCriarProdutoQuandoInformarDadosValidos() {
+    @DisplayName("Deve criar cliente quando informar dados validos")
+    void deveCriarClienteQuandoInformarDadosValidos() {
 
         //given
         ClienteResponse clienteResponse = new ClienteResponse(1l,"Novo cliente", "cliente@email.com",1,"11959168156",true,true);

@@ -86,11 +86,11 @@ public class ExtratoController {
     public ResponseEntity<byte[]> downloadTxt(@PathVariable long idCliente,
                                               @PathVariable int mes,
                                               @PathVariable int ano) {
-        clienteService.foundClienteOrThrow(idCliente);
         List<ExtratoResponse> listaExtrato = Collections.singletonList(service.get(idCliente, mes, ano));
-        service.gravaArquivoTxt(listaExtrato, "extrato.txt");
+        service.gravaArquivoTxt(listaExtrato, "extrato");
 
-        File file = this.diretorioBase2.toFile();
+        File file = this.diretorioBase2.resolve("extrato.txt").toFile();
+        //File file = this.diretorioBase2.toFile();
 
         try {
             InputStream fileInputStream = new FileInputStream(file);
