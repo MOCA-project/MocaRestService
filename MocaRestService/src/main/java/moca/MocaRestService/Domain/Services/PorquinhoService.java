@@ -1,6 +1,7 @@
 package moca.MocaRestService.Domain.Services;
 
 import moca.MocaRestService.Domain.Helper.Enums.TipoReceitaEnum;
+import moca.MocaRestService.Domain.Helper.Exception.CustomException;
 import moca.MocaRestService.Domain.Models.Responses.HistoricoPorquinho;
 import moca.MocaRestService.Domain.Models.Responses.HistoricoPorquinhoItem;
 import moca.MocaRestService.Infrastructure.Entities.Despesa;
@@ -12,7 +13,9 @@ import moca.MocaRestService.Infrastructure.Repositories.IPorquinhoRepository;
 import moca.MocaRestService.Domain.Models.Requests.PorquinhoRequest;
 import moca.MocaRestService.Domain.Models.Responses.PorquinhoResponse;
 import moca.MocaRestService.Infrastructure.Repositories.IReceitasRepository;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -131,7 +134,7 @@ public class PorquinhoService {
             return ResponseEntity.status(200).build();
         }
 
-        return ResponseEntity.status(404).build();
+        throw new CustomException("Porquinho não encontrado", HttpStatus.NOT_FOUND);
     }
 
     public double mostrarPorcentagem(long idCliente, long idPorquinho){
