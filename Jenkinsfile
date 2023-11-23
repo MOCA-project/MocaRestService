@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Preparação') {
             steps {
-                echo 'Realizando etapas de preparação antes do build...'
+                echo 'Realizando etapas de preparação antes do build..'
             }
         }
 
